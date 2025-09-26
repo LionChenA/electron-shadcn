@@ -1,7 +1,6 @@
-import React from "react";
-import ToggleTheme from "@/components/ToggleTheme";
 import { useTranslation } from "react-i18next";
 import LangToggle from "@/components/LangToggle";
+import ToggleTheme from "@/components/ToggleTheme";
 import Footer from "@/components/template/Footer";
 import InitialIcons from "@/components/template/InitialIcons";
 
