@@ -7,5 +7,5 @@
  * @returns true if running on macOS, false otherwise
  */
 export const isMacOS = (): boolean => {
-  return window?.navigator.platform.includes("Mac");
+  return window?.navigator.platform.includes('Mac');
 };

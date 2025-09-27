@@ -61,12 +61,7 @@
       }
     },
     {
-      "includes": [
-        "*.config.js",
-        "*.config.ts",
-        "*.config.mts",
-        "forge.config.ts"
-      ],
+      "includes": ["*.config.js", "*.config.ts", "*.config.mts", "forge.config.ts"],
       "linter": {
         "rules": {
           "style": {

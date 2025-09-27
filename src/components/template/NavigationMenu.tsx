@@ -1,12 +1,12 @@
-import { Link } from "@tanstack/react-router";
-import { useTranslation } from "react-i18next";
+import { Link } from '@tanstack/react-router';
+import { useTranslation } from 'react-i18next';
 import {
   NavigationMenu as NavigationMenuBase,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
   navigationMenuTriggerStyle,
-} from "../ui/navigation-menu";
+} from '../ui/navigation-menu';
 
 export default function NavigationMenu() {
   const { t } = useTranslation();
@@ -16,12 +16,12 @@ export default function NavigationMenu() {
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-            <Link to="/">{t("titleHomePage")}</Link>
+            <Link to="/">{t('titleHomePage')}</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem>
           <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-            <Link to="/second-page">{t("titleSecondPage")}</Link>
+            <Link to="/second-page">{t('titleSecondPage')}</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
       </NavigationMenuList>

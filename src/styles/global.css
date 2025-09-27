@@ -111,8 +111,7 @@
     font-weight: 700;
     font-style: italic;
 
-    src: url("../assets/fonts/tomorrow/tomorrow-bold-italic.ttf")
-      format("truetype");
+    src: url("../assets/fonts/tomorrow/tomorrow-bold-italic.ttf") format("truetype");
   }
 }
 

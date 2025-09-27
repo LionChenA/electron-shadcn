@@ -1,10 +1,6 @@
-import type { ReactNode } from "react";
-import {
-  closeWindow,
-  maximizeWindow,
-  minimizeWindow,
-} from "@/helpers/window_helpers";
-import { isMacOS } from "@/utils/platform";
+import type { ReactNode } from 'react';
+import { closeWindow, maximizeWindow, minimizeWindow } from '@/helpers/window_helpers';
+import { isMacOS } from '@/utils/platform';
 
 interface DragWindowRegionProps {
   title?: ReactNode;
@@ -39,13 +35,7 @@ function WindowButtons() {
         className="p-2 hover:bg-slate-300"
         onClick={minimizeWindow}
       >
-        <svg
-          aria-hidden="true"
-          role="img"
-          width="12"
-          height="12"
-          viewBox="0 0 12 12"
-        >
+        <svg aria-hidden="true" role="img" width="12" height="12" viewBox="0 0 12 12">
           <rect fill="currentColor" width="10" height="1" x="1" y="6"></rect>
         </svg>
       </button>
@@ -55,36 +45,12 @@ function WindowButtons() {
         className="p-2 hover:bg-slate-300"
         onClick={maximizeWindow}
       >
-        <svg
-          aria-hidden="true"
-          role="img"
-          width="12"
-          height="12"
-          viewBox="0 0 12 12"
-        >
-          <rect
-            width="9"
-            height="9"
-            x="1.5"
-            y="1.5"
-            fill="none"
-            stroke="currentColor"
-          ></rect>
+        <svg aria-hidden="true" role="img" width="12" height="12" viewBox="0 0 12 12">
+          <rect width="9" height="9" x="1.5" y="1.5" fill="none" stroke="currentColor"></rect>
         </svg>
       </button>
-      <button
-        type="button"
-        title="Close"
-        className="p-2 hover:bg-red-300"
-        onClick={closeWindow}
-      >
-        <svg
-          aria-hidden="true"
-          role="img"
-          width="12"
-          height="12"
-          viewBox="0 0 12 12"
-        >
+      <button type="button" title="Close" className="p-2 hover:bg-red-300" onClick={closeWindow}>
+        <svg aria-hidden="true" role="img" width="12" height="12" viewBox="0 0 12 12">
           <polygon
             fill="currentColor"
             fillRule="evenodd"
