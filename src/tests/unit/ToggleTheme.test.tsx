@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import { expect, test } from 'vitest';
-import ToggleTheme from '@/components/ToggleTheme';
+import ToggleTheme from '@/renderer/components/ToggleTheme';
 
 test('renders ToggleTheme', () => {
   const { getByRole } = render(<ToggleTheme />);

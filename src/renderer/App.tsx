@@ -1,0 +1,29 @@
+import React, { useEffect } from 'react';
+import { createRoot } from 'react-dom/client';
+import { useTranslation } from 'react-i18next';
+import { syncThemeWithLocal } from './theme/service';
+import './localization/i18n.ts';
+import { RouterProvider } from '@tanstack/react-router';
+import { updateAppLanguage } from './localization/service';
+import { router } from './routes/router';
+
+export default function App() {
+  const { i18n } = useTranslation();
+
+  useEffect(() => {
+    syncThemeWithLocal();
+    updateAppLanguage(i18n);
+  }, [i18n]);
+
+  return <RouterProvider router={router} />;
+}
+
+const container = document.getElementById('app');
+if (container) {
+  const root = createRoot(container);
+  root.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>,
+  );
+}

@@ -1,0 +1,11 @@
+{
+    "css": {
+        "editor.defaultFormatter": "biomejs.biome"
+    },
+    "files.associations": {
+        "*.css": "tailwindcss"
+    },
+    "context": {
+        "fileName": ["Architecture.md"]
+  }
+}
