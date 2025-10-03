@@ -25,6 +25,7 @@ function createWindow() {
   });
   registerListeners(mainWindow);
 
+  // HMR, see https://www.electronforge.io/config/plugins/vite
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
     mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
   } else {
