@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "circuit-electron": {
+      "command": "npx",
+      "args": [
+        "@snowfort/circuit-electron@latest"
+      ],
+      "disabledTools": [
+        "smart_click",
+        "click",
+        "ipc_invoke"
+      ]
+    }
+  }
+}
