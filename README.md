@@ -1,146 +1,118 @@
+[![CI/CD Status](https://github.com/LuanRoger/electron-shadcn/actions/workflows/testing.yml/badge.svg)](https://github.com/LuanRoger/electron-shadcn/actions/workflows/testing.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+
 # electron-shadcn
 
-Electron in all its glory. Everything you will need to develop your beautiful desktop application.
+A production-ready, feature-rich scaffold for building beautiful, modern desktop applications with Electron, React, and Shadcn/UI.
+
+## ✨ Core Philosophy
+
+This template aims to provide a solution that balances a **premium developer experience** with **high-quality output**.
+
+- 🚀 **Lightning-Fast Development**: Instant Hot Module Replacement (HMR) powered by Vite, combined with isolated component development in Storybook, lets you focus on creating.
+- 💅 **Exquisite UI Out-of-the-Box**: Comes with Shadcn/UI and Tailwind CSS, with pre-configured features like theme switching and internationalization.
+- ✅ **Rock-Solid Code Quality**: Guarantees code standards from the source with TypeScript, Biome (Linter & Formatter), and Husky (Git Hooks).
+- 🧪 **Layered Testing, Full Confidence**: Follows the "Testing Pyramid" strategy, integrating Storybook (Visual), Vitest (Unit/Integration), and Playwright (End-to-End) for robust application testing.
+
+## 📸 Overview
 
 ![Demo GIF](https://github.com/LuanRoger/electron-shadcn/blob/main/images/demo.gif)
 
-## Libs and tools
+## 📖 Table of Contents
 
-To develop a Electron app, you probably will need some UI, test, formatter, style or other kind of library or framework, so let me install and configure some of them to you.
+- [electron-shadcn](#electron-shadcn)
+  - [✨ Core Philosophy](#-core-philosophy)
+  - [📸 Overview](#-overview)
+  - [📖 Table of Contents](#-table-of-contents)
+  - [🛠️ Tech Stack](#️-tech-stack)
+  - [🚀 Getting Started](#-getting-started)
+  - [📖 Key Concepts \& Conventions](#-key-concepts--conventions)
+    - [1. Project Structure](#1-project-structure)
+    - [2. Testing Strategy](#2-testing-strategy)
+    - [3. Storybook Workflow](#3-storybook-workflow)
+    - [4. Code Style \& Import Rules](#4-code-style--import-rules)
+  - [📜 Available Scripts](#-available-scripts)
+  - [🤝 Contributing](#-contributing)
+  - [📄 License](#-license)
 
-### Core 🏍️
+## 🛠️ Tech Stack
 
-- [Electron 38](https://www.electronjs.org)
-- [Vite 7](https://vitejs.dev)
+| Category                 | Technology                                                  |
+| :----------------------- | :---------------------------------------------------------- |
+| **Core**                 | Electron, Vite                                              |
+| **UI**                   | React 19, Shadcn/UI, Tailwind CSS, i18next, TanStack Router |
+| **Developer Experience** | TypeScript, Biome, Storybook                                |
+| **Testing**              | Vitest, React Testing Library, Playwright                   |
+| **Packaging**            | Electron Forge                                              |
 
-### DX 🛠️
+## 🚀 Getting Started
 
-- [TypeScript 5.9](https://www.typescriptlang.org)
-- [Biome](https://biomejs.dev) - Fast linter and formatter (replaces ESLint and Prettier)
-- [Zod 4](https://zod.dev)
-- [React Query (TanStack)](https://react-query.tanstack.com)
+1.  **Clone or use as a template**
 
-### UI 🎨
+    ```bash
+    git clone https://github.com/LionChenA/electron-shadcn.git
+    ```
 
-- [React 19](https://reactjs.org)
-- [Tailwind 4](https://tailwindcss.com)
-- [Shadcn UI](https://ui.shadcn.com)
-- [Geist](https://vercel.com/font) as default font
-- [i18next](https://www.i18next.com)
-- [TanStack Router](https://tanstack.com/router)
-- [Lucide](https://lucide.dev)
+2.  **Install dependencies**
 
-### Test 🧪
+    ```bash
+    pnpm install
+    ```
 
-- [Vitest](https://vitest.dev)
-- [Playwright](https://playwright.dev)
-- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)
+3.  **Run the app**
 
-### Packing and distribution 📦
+    ```bash
+    pnpm run start
+    ```
 
-- [Electron Forge](https://www.electronforge.io)
+## 📖 Key Concepts & Conventions
 
-### CI/CD 🚀
+This section details the important design decisions and standards for this project.
 
-- Pre-configured [GitHub Actions workflow](https://github.com/LuanRoger/electron-shadcn/blob/main/.github/workflows/playwright.yml), for test with Playwright
+### 1. Project Structure
 
-### Project preferences 🎯
+The `src` directory is divided into three main parts, following the standard Electron architecture:
+- `main`: Code for the main process (node environment).
+- `preload`: Scripts that bridge the gap between the main and renderer processes.
+- `renderer`: The user interface code (browser environment).
 
-- Use Context isolation
-- [React Compiler](https://react.dev/learn/react-compiler) is enabled by default.
-- `titleBarStyle`: hidden (Using custom title bar)
-- Geist as default font
-- Some default styles was applied, check the [`styles`](https://github.com/LuanRoger/electron-shadcn/tree/main/src/styles) directory
-- React DevTools are installed by default
+### 2. Testing Strategy
 
-## Directory structure
+We follow the **Testing Pyramid** model:
+- **Visual Testing (Storybook)**: Develop components in isolation and use stories as the basis for visual regression testing.
+- **Unit/Integration Testing (Vitest)**: Test individual functions, components, and their interactions, including IPC communication.
+- **End-to-End Testing (Playwright)**: Test critical user journeys in the final, packaged application.
 
-```plaintext
-.
-└── ./src/
-    ├── ./src/assets/
-    │   └── ./src/assets/fonts/
-    ├── ./src/components/
-    │   ├── ./src/components/template
-    │   └── ./src/components/ui/
-    ├── ./src/helpers/
-    │   └── ./src/helpers/ipc/
-    ├── ./src/layout/
-    ├── ./src/lib/
-    ├── ./src/pages/
-    ├── ./src/style/
-    └── ./src/tests/
-```
+### 3. Storybook Workflow
 
-- `src/`: Main directory
-  - `assets/`: Store assets like images, fonts, etc.
-  - `components/`: Store UI components
-    - `template/`: Store the all not important components used by the template. It doesn't include the `WindowRegion` or the theme toggler, if you want to start an empty project, you can safely delete this directory.
-    - `ui/`: Store Shadcn UI components (this is the default direcotry used by Shadcn UI)
-  - `helpers/`: Store IPC related functions to be called in the renderer process
-    - `ipc/`: Directory to store IPC context and listener functions
-      - Some implementations are already done, like `theme` and `window` for the custom title bar
-  - `layout/`: Directory to store layout components
-  - `lib/`: Store libraries and other utilities
-  - `pages/`: Store app's pages
-  - `style/`: Store global styles
-  - `tests/`: Store tests (from Vitest and Playwright)
+- Run `pnpm storybook` to start the development server.
+- **Co-location**: Story files (`*.stories.tsx`) are located next to their corresponding component files. This keeps all component-related code in one place.
 
-## NPM script
+### 4. Code Style & Import Rules
 
-To run any of those scripts:
+- **Path Aliases**: Always prefer absolute aliases (`@/`) for imports outside the current directory. Use relative paths (`./`) only for sibling files. **Avoid `../` entirely.**
+- **Import Order**: Automatically enforced by Biome on save.
 
-```bash
-npm run <script>
-```
+## 📜 Available Scripts
 
-- `start`: Start the app in development mode
-- `package`: Package your application into a platform-specific executable bundle and put the result in a folder.
-- `make`: Generate platform-specific distributables (e.g. .exe, .dmg, etc) of your application for distribution.
-- `publish`: Electron Forge's way of taking the artifacts generated by the `make` command and sending them to a service somewhere for you to distribute or use as updates.
-- `lint`: Run Biome to lint the code
-- `lint:fix`: Run Biome to fix lint issues
-- `format`: Run Biome to check code formatting (it doesn't change the code)
-- `format:write`: Run Biome to format the code
-- `test`: Run the default unit-test script (Vitest)
-- `test:watch`: Run the default unit-test script in watch mode (Vitest)
-- `test:unit`: Run the Vitest tests
-- `test:e2e`: Run the Playwright tests
-- `test:all`: Run all tests (Vitest and Playwright)
+| Command                | Description                                          |
+| :--------------------- | :--------------------------------------------------- |
+| `pnpm start`           | Starts the app in development mode.                  |
+| `pnpm package`         | Packages the application into an executable bundle.  |
+| `pnpm make`            | Creates distributable installers (e.g., .exe, .dmg). |
+| `pnpm check`           | Runs Biome to check for formatting and lint issues.  |
+| `pnpm test`            | Runs all unit tests with Vitest.                     |
+| `pnpm test:e2e`        | Runs all end-to-end tests with Playwright.           |
+| `pnpm storybook`       | Starts the Storybook development server.             |
+| `pnpm build-storybook` | Builds Storybook as a static web application.        |
 
-> The test scripts involving Playwright require the app be builded before running the tests. So, before run the tests, run the `package`, `make` or `publish` script.
+## 🤝 Contributing
 
-## How to use
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-1. Clone this repository
+Please read our [**CONTRIBUTING.md**](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
 
-```bash
-git clone https://github.com/LuanRoger/electron-shadcn.git
-```
+## 📄 License
 
-Or use it as a template on GitHub
-
-2. Install dependencies
-
-```bash
-npm install
-```
-
-3. Run the app
-
-```bash
-npm run start
-```
-
-## Used by
-
-- [yaste](https://github.com/LuanRoger/yaste) - yaste (Yet another super ₛᵢₘₚₗₑ text editor) is a text editor, that can be used as an alternative to the native text editor of your SO, maybe.
-- [eletric-drizzle](https://github.com/LuanRoger/electric-drizzle) - shadcn-ui and Drizzle ORM with Electron.
-- [Wordle Game](https://github.com/masonyekta/wordle-game) - A Wordle game which features interactive gameplay, cross-platform compatibility, and integration with a custom Wordle API for word validation and letter correctness.
-- [Mehr 🌟](https://github.com/xmannii/MehrLocalChat) - A modern, elegant local AI chatbot application using Electron, React, shadcn/ui, and Ollama.
-
-> Does you've used this template in your project? Add it here and open a PR.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/LuanRoger/electron-shadcn/blob/main/LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
