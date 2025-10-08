@@ -1,6 +1,6 @@
 import type React from 'react';
-import DragWindowRegion from '@/renderer/components/DragWindowRegion';
-import NavigationMenu from '@/renderer/components/NavigationMenu';
+import DragWindowRegion from '@/components/DragWindowRegion';
+import NavigationMenu from '@/components/NavigationMenu';
 
 export default function BaseLayout({ children }: { children: React.ReactNode }) {
   return (
