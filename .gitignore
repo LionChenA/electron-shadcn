@@ -102,3 +102,6 @@ out/
 
 *storybook.log
 storybook-static
+
+# Generated files
+src/renderer/routeTree.gen.ts

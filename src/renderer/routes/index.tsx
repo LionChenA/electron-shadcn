@@ -1,10 +1,12 @@
+import { createFileRoute } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
+
 import Footer from '@/components/Footer';
 import InitialIcons from '@/components/InitialIcons';
 import LangToggle from '@/components/LangToggle';
 import ToggleTheme from '@/components/ToggleTheme';
 
-export default function HomePage() {
+function HomePage() {
   const { t } = useTranslation();
 
   return (
@@ -24,3 +26,7 @@ export default function HomePage() {
     </div>
   );
 }
+
+export const Route = createFileRoute('/')({
+  component: HomePage,
+});
