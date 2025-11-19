@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "types": ["vitest/globals", "vitest/importMeta", "vitest/jsdom", "vitest/browser"]
+  },
+  "include": [
+    "src/**/*",
+    "test/integration/**/*",
+    "*.config.*",
+    ".storybook/**/*"
+  ],
+  "exclude": [
+    "test/e2e/**/*"
+  ]
+}

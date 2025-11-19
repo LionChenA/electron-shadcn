@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "lib": ["ESNext", "DOM"],
+    "types": ["node"],
+    "module": "CommonJS",
+    "moduleResolution": "Node"
+  },
+  "include": [
+    "test/e2e/**/*"
+  ],
+  "exclude": [
+    "src/**/*",
+    "test/integration/**/*",
+    "**/*.config.*",
+    "**/.storybook/**/*"
+  ]
+}
