@@ -7,13 +7,6 @@
     "module": "CommonJS",
     "moduleResolution": "Node"
   },
-  "include": [
-    "test/e2e/**/*"
-  ],
-  "exclude": [
-    "src/**/*",
-    "test/integration/**/*",
-    "**/*.config.*",
-    "**/.storybook/**/*"
-  ]
+  "include": ["test/e2e/**/*"],
+  "exclude": ["src/**/*", "test/integration/**/*", "**/*.config.*", "**/.storybook/**/*"]
 }
