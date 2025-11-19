@@ -25,6 +25,9 @@
   },
   "author": "ROG <luan.roger.2003@gmail.com>",
   "license": "MIT",
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,json,css,md}": "npx @biomejs/biome check --write"
+  },
   "devDependencies": {
     "@biomejs/biome": "^2.2.4",
     "@chromatic-com/storybook": "^4.1.1",
@@ -61,6 +64,7 @@
     "electron-playwright-helpers": "^1.8.2",
     "husky": "^9.1.7",
     "jsdom": "^27.0.0",
+    "lint-staged": "^16.2.6",
     "playwright": "^1.56.0",
     "storybook": "^9.1.10",
     "tailwindcss": "^4.1.11",
