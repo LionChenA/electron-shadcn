@@ -33,7 +33,7 @@ The project SHALL provide three distinct TypeScript configurations derived from 
 
 ---
 
-## MODIFIED Requirements
+## ADDED Requirements
 ### Requirement: Test File Organization
 The testing system SHALL organize test files according to their scope and purpose:
 
@@ -209,7 +209,7 @@ Playwright SHALL be configured to:
 
 ---
 
-## REMOVED Requirements
+## ADDED Requirements
 ### Requirement: Centralized Test Directory
 The `src/tests/` directory SHALL be removed as test files are now organized by their scope and location.
 

@@ -1,6 +1,6 @@
 # Tasks: Integrate Upstream Main Changes
 
-**Guiding Principle**: While this plan provides structure, the primary reference for all implementation details must be the **actual code** from the corresponding `upstream/main` commits.
+**Guiding Principle**: While this plan provides structure, the primary reference for all implementation details must be the **actual code** from the corresponding `upstream/main` commits. The `changes.txt` file serves only as an index. You **must** use `git` tools to inspect the actual changes within the corresponding commits on the `upstream/main` branch to determine how to update the project. Do not rely solely on parsing commit messages.
 
 This plan integrates changes by applying them in chronologically ordered stages, following our definitive design for oRPC integration.
 
