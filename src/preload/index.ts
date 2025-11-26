@@ -1,3 +1,8 @@
-import exposeContexts from './lib/contextExposer';
+import { ipcRenderer } from 'electron';
 
-exposeContexts();
+window.addEventListener('message', (event) => {
+  if (event.data === 'start-orpc-client') {
+    const [serverPort] = event.ports;
+    ipcRenderer.postMessage('start-orpc-server', null, [serverPort]);
+  }
+});
