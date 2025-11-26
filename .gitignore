@@ -95,12 +95,11 @@ out/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
-/test-results/
-/playwright-report/
-/blob-report/
-/playwright/.cache/
 
 *storybook.log
 storybook-static
 
 # Generated files
+
+# Tanstack
+.tanstack/
