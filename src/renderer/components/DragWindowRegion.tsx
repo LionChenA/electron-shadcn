@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { isMacOS } from '@/shared/utils/platform';
+import { isMacOS } from '@/utils/platform';
 
 interface DragWindowRegionProps {
   title?: ReactNode;
