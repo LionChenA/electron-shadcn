@@ -3,7 +3,7 @@
 import path from 'node:path';
 import { app, BrowserWindow, ipcMain } from 'electron';
 import { installExtension, REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
-import { rpcHandler } from '../helpers/ipc';
+import { ipcContext } from '../helpers/ipc/context';
 
 const inDevelopment = process.env.NODE_ENV === 'development';
 
@@ -23,6 +23,7 @@ function createWindow() {
     titleBarStyle: process.platform === 'darwin' ? 'hiddenInset' : 'hidden',
     trafficLightPosition: process.platform === 'darwin' ? { x: 5, y: 5 } : undefined,
   });
+  ipcContext.setMainWindow(mainWindow);
 
   // HMR, see https://www.electronforge.io/config/plugins/vite
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
@@ -41,7 +42,8 @@ async function installExtensions() {
   }
 }
 
-function setupIPC() {
+async function setupORPC() {
+  const { rpcHandler } = await import('../helpers/ipc/handler');
   ipcMain.on('start-orpc-server', (event) => {
     const [serverPort] = event.ports;
 
@@ -50,7 +52,7 @@ function setupIPC() {
   });
 }
 
-app.whenReady().then(createWindow).then(installExtensions).then(setupIPC);
+app.whenReady().then(createWindow).then(installExtensions).then(setupORPC);
 
 //osX only
 app.on('window-all-closed', () => {

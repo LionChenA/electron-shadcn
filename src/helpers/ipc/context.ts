@@ -16,7 +16,7 @@ class IPCContext {
     return os.middleware(({ next }) =>
       next({
         context: {
-          window: this.mainWindow!,
+          window: this.mainWindow,
         },
       }),
     );
