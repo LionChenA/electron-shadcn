@@ -7,44 +7,44 @@ The commits are grouped into chronological stages of development.
 # This initial phase consists of routine dependency updates and minor project
 # configurations and style cleanups.
 
-1903b70 chore(deps-dev): bump @playwright/test from 1.55.1 to 1.56.0
-5c569ec chore(deps-dev): bump electron from 38.1.2 to 38.2.2
-859ecd9 Merge pull request #329 from LuanRoger/dependabot/npm_and_yarn/electron-38.2.2
-a2717ca Merge pull request #327 from LuanRoger/dependabot/npm_and_yarn/playwright/test-1.56.0
-e57e942 chore: update deps
-a278e2d chore: update README and LICENSE
-cef717e chore: use reactHooks in ESLint
-4f41f26 chore: don't ignore TanStack route file
-19142a2 style: run Prettier
-9b1a035 Merge pull request #331 from LuanRoger/chore/updates
-c31816a chore(eslint): configure for React jsx-runtime
-a454289 chore(deps-dev): bump eslint from 9.37.0 to 9.38.0
-bad743a chore(deps-dev): bump electron from 38.2.2 to 38.3.0
-2e3cc0f chore(deps-dev): bump vite from 7.1.10 to 7.1.11
-655d4bf chore(deps): bump @tanstack/react-router-devtools
-c228f63 chore(deps-dev): bump jsdom from 27.0.0 to 27.0.1
-0dbfbd8 Merge pull request #338 from LuanRoger/dependabot/npm_and_yarn/jsdom-27.0.1
-966d842 Merge pull request #337 from LuanRoger/dependabot/npm_and_yarn/tanstack/react-router-devtools-1.133.15
-425864d Merge pull request #336 from LuanRoger/dependabot/npm_and_yarn/vite-7.1.11
-f6e1f6a Merge pull request #335 from LuanRoger/dependabot/npm_and_yarn/electron-38.3.0
-912168b Merge pull request #334 from LuanRoger/dependabot/npm_and_yarn/eslint-9.38.0
-a6fac76 Merge pull request #333 from feri-irawan/eslint-config
-c525728 chore(deps-dev): bump @vitejs/plugin-react from 5.0.4 to 5.1.0
-df7cbf7 chore(deps-dev): bump prettier-plugin-tailwindcss from 0.7.0 to 0.7.1
-ab1c51c chore(deps-dev): bump vite from 7.1.11 to 7.1.12
-c0a27b4 chore(deps-dev): bump eslint-plugin-react-hooks from 7.0.0 to 7.0.1
-679c0d2 Merge pull request #342 from LuanRoger/dependabot/npm_and_yarn/eslint-plugin-react-hooks-7.0.1
-aa6d4bc Merge pull request #341 from LuanRoger/dependabot/npm_and_yarn/vite-7.1.12
-ebaa577 Merge pull request #340 from LuanRoger/dependabot/npm_and_yarn/prettier-plugin-tailwindcss-0.7.1
-db1f2e6 Merge pull request #339 from LuanRoger/dependabot/npm_and_yarn/vitejs/plugin-react-5.1.0
-849ea01 chore(deps-dev): bump tailwindcss from 4.1.14 to 4.1.16
-2e00d44 chore(deps): bump @tanstack/react-router from 1.133.15 to 1.134.9
-f19cd96 chore(deps-dev): bump @eslint/js from 9.38.0 to 9.39.0
-9304fcd Merge pull request #348 from LuanRoger/dependabot/npm_and_yarn/eslint/js-9.39.0
-053490f Merge pull request #347 from LuanRoger/dependabot/npm_and_yarn/tanstack/react-router-1.134.9
-87cd25f Merge pull request #345 from LuanRoger/dependabot/npm_and_yarn/tailwindcss-4.1.16
-976ceca chore(deps-dev): bump @tanstack/router-plugin from 1.132.56 to 1.134.9
-73e9064 Merge pull request #346 from LuanRoger/dependabot/npm_and_yarn/tanstack/router-plugin-1.134.9
+- 1903b70 chore(deps-dev): bump @playwright/test from 1.55.1 to 1.56.0
+- 5c569ec chore(deps-dev): bump electron from 38.1.2 to 38.2.2
+- 859ecd9 Merge pull request #329 from LuanRoger/dependabot/npm_and_yarn/electron-38.2.2
+- a2717ca Merge pull request #327 from LuanRoger/dependabot/npm_and_yarn/playwright/test-1.56.0
+- e57e942 chore: update deps
+- a278e2d chore: update README and LICENSE
+- cef717e chore: use reactHooks in ESLint
+- 4f41f26 chore: don't ignore TanStack route file
+- 19142a2 style: run Prettier
+- 9b1a035 Merge pull request #331 from LuanRoger/chore/updates
+- c31816a chore(eslint): configure for React jsx-runtime
+- a454289 chore(deps-dev): bump eslint from 9.37.0 to 9.38.0
+- bad743a chore(deps-dev): bump electron from 38.2.2 to 38.3.0
+- 2e3cc0f chore(deps-dev): bump vite from 7.1.10 to 7.1.11
+- 655d4bf chore(deps): bump @tanstack/react-router-devtools
+- c228f63 chore(deps-dev): bump jsdom from 27.0.0 to 27.0.1
+- 0dbfbd8 Merge pull request #338 from LuanRoger/dependabot/npm_and_yarn/jsdom-27.0.1
+- 966d842 Merge pull request #337 from LuanRoger/dependabot/npm_and_yarn/tanstack/react-router-devtools-1.133.15
+- 425864d Merge pull request #336 from LuanRoger/dependabot/npm_and_yarn/vite-7.1.11
+- f6e1f6a Merge pull request #335 from LuanRoger/dependabot/npm_and_yarn/electron-38.3.0
+- 912168b Merge pull request #334 from LuanRoger/dependabot/npm_and_yarn/eslint-9.38.0
+- a6fac76 Merge pull request #333 from feri-irawan/eslint-config
+- c525728 chore(deps-dev): bump @vitejs/plugin-react from 5.0.4 to 5.1.0
+- df7cbf7 chore(deps-dev): bump prettier-plugin-tailwindcss from 0.7.0 to 0.7.1
+- ab1c51c chore(deps-dev): bump vite from 7.1.11 to 7.1.12
+- c0a27b4 chore(deps-dev): bump eslint-plugin-react-hooks from 7.0.0 to 7.0.1
+- 679c0d2 Merge pull request #342 from LuanRoger/dependabot/npm_and_yarn/eslint-plugin-react-hooks-7.0.1
+- aa6d4bc Merge pull request #341 from LuanRoger/dependabot/npm_and_yarn/vite-7.1.12
+- ebaa577 Merge pull request #340 from LuanRoger/dependabot/npm_and_yarn/prettier-plugin-tailwindcss-0.7.1
+- db1f2e6 Merge pull request #339 from LuanRoger/dependabot/npm_and_yarn/vitejs/plugin-react-5.1.0
+- 849ea01 chore(deps-dev): bump tailwindcss from 4.1.14 to 4.1.16
+- 2e00d44 chore(deps): bump @tanstack/react-router from 1.133.15 to 1.134.9
+- f19cd96 chore(deps-dev): bump @eslint/js from 9.38.0 to 9.39.0
+- 9304fcd Merge pull request #348 from LuanRoger/dependabot/npm_and_yarn/eslint/js-9.39.0
+- 053490f Merge pull request #347 from LuanRoger/dependabot/npm_and_yarn/tanstack/react-router-1.134.9
+- 87cd25f Merge pull request #345 from LuanRoger/dependabot/npm_and_yarn/tailwindcss-4.1.16
+- 976ceca chore(deps-dev): bump @tanstack/router-plugin from 1.132.56 to 1.134.9
+- 73e9064 Merge pull request #346 from LuanRoger/dependabot/npm_and_yarn/tanstack/router-plugin-1.134.9
 
 # =================================================================
 # Stage 2: Core Refactoring - Typed IPC ("oRPC") Implementation

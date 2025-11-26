@@ -104,4 +104,3 @@ out/
 storybook-static
 
 # Generated files
-src/renderer/routeTree.gen.ts

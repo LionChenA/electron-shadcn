@@ -9,7 +9,7 @@ importers:
   .:
     dependencies:
       '@icons-pack/react-simple-icons':
-        specifier: ^13.7.0
+        specifier: ^13.8.0
         version: 13.8.0(react@19.2.0)
       '@radix-ui/react-navigation-menu':
         specifier: ^1.2.14
@@ -24,16 +24,16 @@ importers:
         specifier: ^1.1.11
         version: 1.1.11(@types/react-dom@19.2.3(@types/react@19.2.5))(@types/react@19.2.5)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@tailwindcss/vite':
-        specifier: ^4.1.13
+        specifier: ^4.1.14
         version: 4.1.17(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))
       '@tanstack/react-query':
-        specifier: ^5.90.2
+        specifier: ^5.90.3
         version: 5.90.9(react@19.2.0)
       '@tanstack/react-router':
-        specifier: ^1.132.47
+        specifier: ^1.134.9
         version: 1.136.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@tanstack/react-router-devtools':
-        specifier: ^1.132.51
+        specifier: ^1.133.15
         version: 1.136.5(@tanstack/react-router@1.136.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@tanstack/router-core@1.136.5)(@types/node@24.10.1)(csstype@3.2.1)(jiti@2.6.1)(lightningcss@1.30.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(solid-js@1.9.10)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1)
       class-variance-authority:
         specifier: ^0.7.1
@@ -45,19 +45,19 @@ importers:
         specifier: ^1.0.1
         version: 1.0.1
       i18next:
-        specifier: ^25.5.2
+        specifier: ^25.6.0
         version: 25.6.2(typescript@5.9.3)
       lucide-react:
-        specifier: ^0.544.0
-        version: 0.544.0(react@19.2.0)
+        specifier: ^0.545.0
+        version: 0.545.0(react@19.2.0)
       react:
-        specifier: ^19.1.1
+        specifier: ^19.2.0
         version: 19.2.0
       react-dom:
-        specifier: ^19.1.1
+        specifier: ^19.2.0
         version: 19.2.0(react@19.2.0)
       react-i18next:
-        specifier: ^16.0.0
+        specifier: ^16.0.1
         version: 16.3.3(i18next@25.6.2(typescript@5.9.3))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(typescript@5.9.3)
       tailwind-merge:
         specifier: ^3.3.1
@@ -66,7 +66,7 @@ importers:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@4.1.17)
       zod:
-        specifier: ^4.1.11
+        specifier: ^4.1.12
         version: 4.1.12
     devDependencies:
       '@biomejs/biome':
@@ -76,28 +76,28 @@ importers:
         specifier: ^4.1.1
         version: 4.1.2(storybook@9.1.16(@testing-library/dom@10.4.1)(prettier@3.6.2)(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1)))
       '@electron-forge/cli':
-        specifier: ^7.9.0
+        specifier: ^7.10.2
         version: 7.10.2(encoding@0.1.13)(esbuild@0.25.12)
       '@electron-forge/maker-deb':
-        specifier: ^7.9.0
+        specifier: ^7.10.2
         version: 7.10.2
       '@electron-forge/maker-rpm':
-        specifier: ^7.9.0
+        specifier: ^7.10.2
         version: 7.10.2
       '@electron-forge/maker-squirrel':
-        specifier: ^7.9.0
+        specifier: ^7.10.2
         version: 7.10.2
       '@electron-forge/maker-zip':
-        specifier: ^7.9.0
+        specifier: ^7.10.2
         version: 7.10.2
       '@electron-forge/plugin-auto-unpack-natives':
-        specifier: ^7.9.0
+        specifier: ^7.10.2
         version: 7.10.2
       '@electron-forge/plugin-fuses':
-        specifier: ^7.9.0
+        specifier: ^7.10.2
         version: 7.10.2(@electron/fuses@1.8.0)
       '@electron-forge/plugin-vite':
-        specifier: ^7.9.0
+        specifier: ^7.10.2
         version: 7.10.2
       '@electron-forge/shared-types':
         specifier: ^7.8.1
@@ -106,7 +106,7 @@ importers:
         specifier: ~1.8.0
         version: 1.8.0
       '@playwright/test':
-        specifier: ^1.55.1
+        specifier: ^1.56.0
         version: 1.56.1
       '@storybook/addon-a11y':
         specifier: ^9.1.10
@@ -124,10 +124,10 @@ importers:
         specifier: ^9.1.10
         version: 9.1.16(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(rollup@4.53.2)(storybook@9.1.16(@testing-library/dom@10.4.1)(prettier@3.6.2)(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1)))(typescript@5.9.3)(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))
       '@tanstack/router-plugin':
-        specifier: ^1.132.51
+        specifier: ^1.134.9
         version: 1.136.5(@tanstack/react-router@1.136.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(webpack@5.102.1(esbuild@0.25.12))
       '@testing-library/jest-dom':
-        specifier: ^6.8.0
+        specifier: ^6.9.1
         version: 6.9.1
       '@testing-library/react':
         specifier: ^16.3.0
@@ -139,16 +139,16 @@ importers:
         specifier: ^1.0.2
         version: 1.0.2
       '@types/node':
-        specifier: ^24.7.0
+        specifier: ^24.7.2
         version: 24.10.1
       '@types/react':
-        specifier: ^19.2.0
+        specifier: ^19.2.2
         version: 19.2.5
       '@types/react-dom':
-        specifier: ^19.1.9
+        specifier: ^19.2.2
         version: 19.2.3(@types/react@19.2.5)
       '@vitejs/plugin-react':
-        specifier: ^5.0.4
+        specifier: ^5.1.0
         version: 5.1.1(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))
       '@vitest/browser':
         specifier: 3.2.4
@@ -157,10 +157,10 @@ importers:
         specifier: 3.2.4
         version: 3.2.4(@vitest/browser@3.2.4)(vitest@3.2.4)
       babel-plugin-react-compiler:
-        specifier: ^19.1.0-rc.3
-        version: 19.1.0-rc.1-rc-af1b7da-20250421
+        specifier: 1.0.0
+        version: 1.0.0
       electron:
-        specifier: ^38.2.1
+        specifier: ^38.3.0
         version: 38.7.0
       electron-devtools-installer:
         specifier: ^4.0.0
@@ -172,7 +172,7 @@ importers:
         specifier: ^9.1.7
         version: 9.1.7
       jsdom:
-        specifier: ^27.0.0
+        specifier: ^27.0.1
         version: 27.2.0
       lint-staged:
         specifier: ^16.2.6
@@ -184,16 +184,16 @@ importers:
         specifier: ^9.1.10
         version: 9.1.16(@testing-library/dom@10.4.1)(prettier@3.6.2)(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))
       tailwindcss:
-        specifier: ^4.1.11
+        specifier: ^4.1.16
         version: 4.1.17
       ts-node:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@24.10.1)(typescript@5.9.3)
       typescript:
-        specifier: ^5.9.2
+        specifier: ^5.9.3
         version: 5.9.3
       vite:
-        specifier: ^7.1.9
+        specifier: ^7.1.12
         version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1)
       vite-tsconfig-paths:
         specifier: ^5.1.4
@@ -1909,9 +1909,8 @@ packages:
   babel-dead-code-elimination@1.0.10:
     resolution: {integrity: sha512-DV5bdJZTzZ0zn0DC24v3jD7Mnidh6xhKa4GfKCbq3sfW8kaWhDdZjP3i81geA8T33tdYqWKw4D3fVv0CwEgKVA==}
 
-  babel-plugin-react-compiler@19.1.0-rc.1-rc-af1b7da-20250421:
-    resolution: {integrity: sha512-E3kaokBhWDLf7ZD8fuYjYn0ZJHYZ+3EHtAWCdX2hl4lpu1z9S/Xr99sxhx2bTCVB41oIesz9FtM8f4INsrZaOw==}
-    deprecated: Wrong version name was published
+  babel-plugin-react-compiler@1.0.0:
+    resolution: {integrity: sha512-Ixm8tFfoKKIPYdCCKYTsqv+Fd4IJ0DQqMyEimo+pxUOMUR9cVPlwTrFt9Avu+3cb6Zp3mAzl+t1MrG2fxxKsxw==}
 
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
@@ -3014,8 +3013,8 @@ packages:
     resolution: {integrity: sha512-jumlc0BIUrS3qJGgIkWZsyfAM7NCWiBcCDhnd+3NNM5KbBmLTgHVfWBcg6W+rLUsIpzpERPsvwUP7CckAQSOoA==}
     engines: {node: '>=12'}
 
-  lucide-react@0.544.0:
-    resolution: {integrity: sha512-t5tS44bqd825zAW45UQxpG2CvcC4urOwn2TrwSH8u+MjeE+1NnWl6QqeQ/6NdjMqdOygyiT9p3Ev0p1NJykxjw==}
+  lucide-react@0.545.0:
+    resolution: {integrity: sha512-7r1/yUuflQDSt4f1bpn5ZAocyIxcTyVyBBChSVtBKn5M+392cPmI5YJMWOJKk/HUWGm5wg83chlAZtCcGbEZtw==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
@@ -6335,7 +6334,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  babel-plugin-react-compiler@19.1.0-rc.1-rc-af1b7da-20250421:
+  babel-plugin-react-compiler@1.0.0:
     dependencies:
       '@babel/types': 7.28.5
 
@@ -7509,7 +7508,7 @@ snapshots:
 
   lru-cache@7.18.3: {}
 
-  lucide-react@0.544.0(react@19.2.0):
+  lucide-react@0.545.0(react@19.2.0):
     dependencies:
       react: 19.2.0
 
