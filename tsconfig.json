@@ -1,13 +1,4 @@
 {
-  "extends": "./tsconfig.base.json",
-  "compilerOptions": {
-    "outDir": "dist"
-  },
-  "include": [
-    "src/**/*",
-    "./package.json",
-    "./forge.config.ts",
-    "*.mts",
-    "vite.renderer.config.mts"
-  ]
+  "files": [],
+  "references": [{ "path": "src/main" }, { "path": "src/preload" }, { "path": "src/renderer" }]
 }

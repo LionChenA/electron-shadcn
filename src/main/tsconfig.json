@@ -1,0 +1,9 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "../../dist/main",
+    "lib": ["ESNext"]
+  },
+  "include": ["./**/*", "../types.d.ts"],
+  "references": [{ "path": "../shared" }]
+}
