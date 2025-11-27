@@ -1,6 +1,7 @@
 import { type ClientContext, createORPCClient } from '@orpc/client';
 import { RPCLink } from '@orpc/client/message-port';
 import type { RouterClient } from '@orpc/server';
+import { IPC_CHANNELS } from '@/shared/constants';
 import type { router } from './router';
 
 type RPCClient = RouterClient<typeof router>;
@@ -32,7 +33,7 @@ class IPCManager {
 
     this.clientPort.start();
 
-    window.postMessage('start-orpc-client', '*', [this.serverPort]);
+    window.postMessage(IPC_CHANNELS.START_ORPC_SERVER, '*', [this.serverPort]);
     this.initialized = true;
   }
 }
