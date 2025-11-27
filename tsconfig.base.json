@@ -29,7 +29,10 @@
       "@/styles/*": ["src/renderer/styles/*"],
       "@/utils/*": ["src/renderer/utils/*"],
       "@/theme/*": ["src/renderer/theme/*"],
-      "@/localization/*": ["src/renderer/localization/*"]
+      "@/localization/*": ["src/renderer/localization/*"],
+      "@/actions/*": ["src/renderer/actions/*"],
+      "@/ipc/*": ["src/shared/ipc/*"],
+      "@/constants": ["src/shared/constants"]
     },
     "moduleResolution": "bundler",
     "resolveJsonModule": true
