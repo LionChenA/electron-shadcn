@@ -62,8 +62,8 @@ The commits are grouped into chronological stages of development.
 - b420028 refactor: change from helpers to actions and create constants
 - 1b964a1 refactor: use constant in RPC manager init
 - 059830b chore: update README
-aa67a27 style: run Prettier
-09c2d7c Merge pull request #351 from LuanRoger/feat/typed-ipc
+- aa67a27 style: run Prettier
+- 09c2d7c Merge pull request #351 from LuanRoger/feat/typed-ipc
 
 # =================================================================
 # Stage 3: Post-Refactoring Maintenance
