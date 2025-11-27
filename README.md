@@ -42,7 +42,7 @@ This template aims to provide a solution that balances a **premium developer exp
 | :----------------------- | :---------------------------------------------------------- |
 | **Core**                 | Electron, Vite                                              |
 | **UI**                   | React 19, Shadcn/UI, Tailwind CSS, i18next, TanStack Router |
-| **Developer Experience** | TypeScript, Biome, Storybook                                |
+| **Developer Experience** | TypeScript, Biome, oRPC, Storybook                  |
 | **Testing**              | Vitest, React Testing Library, Playwright                   |
 | **Packaging**            | Electron Forge                                              |
 
