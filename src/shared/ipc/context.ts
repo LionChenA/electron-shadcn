@@ -8,15 +8,22 @@ class IPCContext {
     this.mainWindow = window;
   }
 
-  public get mainWindowContext() {
+  private requireMainWindow(): BrowserWindow {
     if (!this.mainWindow) {
       throw new Error('Main window is not set in IPC context.');
     }
+    return this.mainWindow;
+  }
+
+  public get mainWindowContext() {
+    const window = this.requireMainWindow();
 
     return os.middleware(({ next }) =>
       next({
         context: {
-          window: this.mainWindow,
+          window,
+        } as {
+          window: BrowserWindow;
         },
       }),
     );

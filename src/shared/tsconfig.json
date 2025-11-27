@@ -2,7 +2,7 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "../../dist/shared",
-    "lib": ["ESNext"]
+    "lib": ["ESNext", "DOM"]
   },
   "include": ["./**/*", "../types.d.ts"]
 }
