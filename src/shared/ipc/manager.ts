@@ -23,7 +23,7 @@ class IPCManager {
     this.rpcLink = new RPCLink({
       port: this.clientPort,
     });
-    this.client = createORPCClient(this.rpcLink);
+    this.client = createORPCClient<typeof router>(this.rpcLink);
   }
 
   public initialize() {
