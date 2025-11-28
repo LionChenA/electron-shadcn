@@ -6,23 +6,23 @@ This plan integrates changes by applying them in chronologically ordered stages,
 
 ### Phase 1: Branch Creation
 
-1.  [ ] **Branch**: Create a new branch `feature/integrate-upstream-main` from the `dev` branch.
+1.  [x] **Branch**: Create a new branch `feature/integrate-upstream-main` from the `dev` branch.
 
 ### Phase 2: Apply Stage 1 Batch (commits `1903b70` to `73e9064`)**:
-    *   Following the `upstream/main` changes, update `package.json` and other configuration files.
-    *   Run `pnpm install` to update the lockfile.
-    *   **Validation**: Ensure the application builds and all existing tests pass.
+    *   [x] Following the `upstream/main` changes, update `package.json` and other configuration files.
+    *   [x] Run `pnpm install` to update the lockfile.
+    *   [x] **Validation**: Ensure the application builds and all existing tests pass.
 
 ### Phase 3: Apply Stage 2 Commits (Core IPC Refactoring)
 
-3.  [ ] **Prerequisite - Configure TS for Type Imports**:
+3.  [x] **Prerequisite - Configure TS for Type Imports**:
     *   Modify the project's `tsconfig.json` files to support cross-process `import type` statements, preferably using TypeScript Project References.
     *   **Validation**: A test file in `renderer` should be able to successfully `import type` a test type from `main` without compilation errors.
-4.  [ ] **Integrate "oRPC" Feature (Granular Application)**:
+4.  [x] **Integrate "oRPC" Feature (Granular Application)**:
     *   **Reference**: Adhere to the patterns documented in `orpc-electron-guide.md`.
     *   For each commit in "Stage 2" of `changes.txt` (from `816d625` to `09c2d7c`):
-        *   [ ] Re-implement the changes in the `dev` branch, prioritizing the code from `upstream/main`.
-        *   Ensure the implementation correctly uses the `export type`/`import type` pattern.
+        *   [x] Re-implement the changes in the `dev` branch, prioritizing the code from `upstream/main`.
+        *   [x] Ensure the implementation correctly uses the `export type`/`import type` pattern.
     *   **Validation**: After the `oRPC` router and client are set up, write a new integration test to verify end-to-end typed communication.
 
 ### Phase 4 & 5 & 6: Apply Remaining Stages
