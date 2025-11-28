@@ -85,7 +85,7 @@ The commits are grouped into chronological stages of development.
 # file naming conventions, and refactoring component organization.
 
 - 8c47620 refactor: insert template components into pages
-6e2351a refactor: define a pattern to file names
+- 6e2351a refactor: define a pattern to file names
 a822387 feat: create platform RPC call
 f8a8537 chore: update structure on README
 2b60f7a Merge pull request #358 from LuanRoger/feat/new-structure
