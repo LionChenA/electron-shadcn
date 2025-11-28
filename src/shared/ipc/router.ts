@@ -1,9 +1,3 @@
-import { app } from '@/main/ipc/app';
-import { theme } from './theme';
-import { window } from './window';
+import type { AppRouter } from '@/main/ipc/router';
 
-export const router = {
-  theme,
-  window,
-  app,
-};
+export type { AppRouter };

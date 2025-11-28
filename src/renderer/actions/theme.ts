@@ -1,5 +1,5 @@
+import { ipc } from '@/renderer/ipc/manager';
 import { LOCAL_STORAGE_KEYS } from '@/shared/constants';
-import { ipc } from '@/shared/ipc/manager';
 import type { ThemeMode } from '@/shared/types/themeMode';
 
 export interface ThemePreferences {

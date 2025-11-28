@@ -2,8 +2,8 @@ import path from 'node:path';
 import { app, BrowserWindow, ipcMain } from 'electron';
 import { installExtension, REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 import { updateElectronApp } from 'update-electron-app';
+import { ipcContext } from '@/main/ipc/context';
 import { IPC_CHANNELS } from '@/shared/constants';
-import { ipcContext } from '@/shared/ipc/context';
 
 const inDevelopment = process.env.NODE_ENV === 'development';
 
@@ -49,7 +49,7 @@ function checkForUpdates() {
 }
 
 async function setupORPC() {
-  const { rpcHandler } = await import('@/shared/ipc/handler');
+  const { rpcHandler } = await import('@/main/ipc/handler');
   ipcMain.on(IPC_CHANNELS.START_ORPC_SERVER, (event) => {
     const [serverPort] = event.ports;
 

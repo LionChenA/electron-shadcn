@@ -3,9 +3,9 @@ import { describe, expect, test, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import ToggleTheme from '../../src/renderer/components/ToggleTheme';
-import { ipc } from '../../src/shared/ipc/manager';
+import { ipc } from '../../src/renderer/ipc/manager';
 
-vi.mock('../../src/shared/ipc/manager', () => ({
+vi.mock('../../src/renderer/ipc/manager', () => ({
   ipc: {
     client: {
       theme: {
