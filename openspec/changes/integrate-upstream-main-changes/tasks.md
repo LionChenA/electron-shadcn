@@ -27,7 +27,7 @@ This plan integrates changes by applying them in chronologically ordered stages,
 
 ### Phase 4 & 5 & 6: Apply Remaining Stages
 
-5.  [ ] **Apply Stage 3 Batch (commits `e927772` to `61650d7`)**:
+5.  [x] **Apply Stage 3 Batch (commits `e927772` to `61650d7`)**:
     *   Apply post-refactoring dependency updates and run `pnpm install`.
 6.  [ ] **Apply Stage 4 Batch (commits `8c47620` to `2b60f7a`)**:
     *   Apply code structure and file renaming changes.

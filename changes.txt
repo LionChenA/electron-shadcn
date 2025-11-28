@@ -70,13 +70,13 @@ The commits are grouped into chronological stages of development.
 # =================================================================
 # A smaller block of dependency updates following the major RPC refactoring.
 
-e927772 chore: update deps
-b180eeb chore: update README versions
-ef3bb4e Merge pull request #352 from LuanRoger/chore/update-deps
-93fa74c chore(deps-dev): bump @types/node from 24.7.2 to 24.10.0
-7bc7ef8 chore(deps): bump i18next from 25.6.0 to 25.6.1
-e50ea5f Merge pull request #355 from LuanRoger/dependabot/npm_and_yarn/types/node-24.10.0
-61650d7 Merge pull request #354 from LuanRoger/dependabot/npm_and_yarn/i18next-25.6.1
+- e927772 chore: update deps
+- b180eeb chore: update README versions
+- ef3bb4e Merge pull request #352 from LuanRoger/chore/update-deps
+- 93fa74c chore(deps-dev): bump @types/node from 24.7.2 to 24.10.0
+- 7bc7ef8 chore(deps): bump i18next from 25.6.0 to 25.6.1
+- e50ea5f Merge pull request #355 from LuanRoger/dependabot/npm_and_yarn/types/node-24.10.0
+- 61650d7 Merge pull request #354 from LuanRoger/dependabot/npm_and_yarn/i18next-25.6.1
 
 # =================================================================
 # Stage 4: Code Structure & Naming Convention Refactoring
