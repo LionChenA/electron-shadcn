@@ -31,13 +31,13 @@ This plan integrates changes by applying them in chronologically ordered stages,
     *   Apply post-refactoring dependency updates and run `pnpm install`.
 6.  [x] **Apply Stage 4 Batch (commits `8c47620` to `2b60f7a`)**:
     *   Apply code structure and file renaming changes.
-7.  [ ] **Apply Stage 5 Batch (commits `7c07650` to `114ac4b`)**:
+7.  [x] **Apply Stage 5 Batch (commits `7c07650` to `114ac4b`)**:
     *   Apply auto-updater and CI workflow changes.
 
 ### Phase 7: Final Validation
 
-8.  [ ] **Linters & Formatters**: Run `pnpm format` and `pnpm lint` and fix all issues.
-9.  [ ] **Automated Testing**: Execute the entire test suite and ensure 100% pass rate.
+8.  [x] **Linters & Formatters**: Run `pnpm format` and `pnpm lint` and fix all issues.
+9.  [x] **Automated Testing**: Execute the entire test suite and ensure 100% pass rate.
 10. [ ] **Manual Smoke Test**: Perform a full manual test of all integrated features, especially theme-switching and window management via oRPC.
 11. [ ] **Review**: Open a Pull Request.
 12. [x] **Codify IPC Architecture**: Add a new rule to `openspec/AGENTS.md` to enforce the new environment-isolated IPC architecture.
