@@ -12,6 +12,25 @@ Instructions for AI coding assistants using OpenSpec for spec-driven development
 - Validate: `openspec validate [change-id] --strict` and fix issues
 - Request approval: Do not start implementation until proposal is approved
 
+## Project-Specific Conventions
+
+### IPC Architectural Conventions
+
+To ensure type safety and clear separation of concerns, all Inter-Process Communication (IPC) using oRPC must adhere to the following structure:
+
+1.  **`src/main/ipc/`**: This directory is the **exclusive location for all IPC implementation logic**.
+    *   All procedure handlers, which may depend on Electron or Node.js APIs, must be located here.
+    *   The central `router` object, which composes all handlers, is defined and implemented in `src/main/ipc/router.ts`.
+
+2.  **`src/shared/`**: This directory is for **pure, environment-agnostic code only**.
+    *   For IPC, its only role is to facilitate type sharing.
+    *   A file like `src/shared/ipc-router.ts` should be used to re-export the router's type definition: `export type { AppRouter } from '@/main/ipc/router';`.
+    *   No file in `shared` should contain runtime code that depends on either the DOM (`window`) or Node.js/Electron (`ipcMain`) APIs.
+
+3.  **`src/renderer/ipc/`**: This is the location for **client-side IPC setup**.
+    *   The `IPCManager` (or equivalent), which creates the `MessageChannel` and the oRPC client instance, must be located here.
+    *   The client must be created by importing the `AppRouter` type from `shared` and using it as a generic: `createORPCClient<AppRouter>({...})`.
+
 ## Three-Stage Workflow
 
 ### Stage 1: Creating Changes

@@ -40,3 +40,15 @@ This plan integrates changes by applying them in chronologically ordered stages,
 9.  [ ] **Automated Testing**: Execute the entire test suite and ensure 100% pass rate.
 10. [ ] **Manual Smoke Test**: Perform a full manual test of all integrated features, especially theme-switching and window management via oRPC.
 11. [ ] **Review**: Open a Pull Request.
+12. [x] **Codify IPC Architecture**: Add a new rule to `openspec/AGENTS.md` to enforce the new environment-isolated IPC architecture.
+
+### Phase 8: Final Architectural Refactoring (Post-Merge)
+
+12. [ ] **Isolate IPC Handlers**: Move `theme` and `window` IPC handlers from `src/shared/ipc` to `src/main/ipc`.
+13. [ ] **Isolate Main-Process Context**: Move `context.ts` and `handler.ts` from `src/shared/ipc` to `src/main/ipc`.
+14. [ ] **Centralize Router Implementation**: Create `src/main/ipc/router.ts` to compose all handlers and export the `AppRouter` type.
+15. [ ] **Isolate IPC Client**: Move `manager.ts` from `src/shared/ipc` to a new `src/renderer/ipc` directory.
+16. [ ] **Create Shared Type Definition**: Modify `src/shared/ipc/router.ts` to only re-export the `AppRouter` type from `main`.
+17. [ ] **Update Client Implementation**: Update the new `manager.ts` to use `createORPCClient<AppRouter>`.
+18. [ ] **Update All Imports**: Go through the codebase and fix all import paths related to the moved IPC files.
+19. [ ] **Validate**: Run `tsc`, `test`, and `lint` to ensure all checks pass after the refactoring.
