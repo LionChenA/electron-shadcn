@@ -96,19 +96,19 @@ The commits are grouped into chronological stages of development.
 # This final set of changes introduces features for production deployment,
 # including a CI/CD workflow for releases and an in-app auto-updater.
 
-7c07650 feat: add GitHub publisher
-afc67c0 ci: create workflow to publish release
-40741d1 Merge branch 'ci/publish-release'
-0c35a9a ci: explicit add GITHUB_TOKEN
-dcd19d0 chore: bump version
-1d3c4d7 feat: add update checker
-269f3f3 feat: rename platform IPC to app
-65bf9a5 fix: document theme sync
-b2c37b8 chore: add comment to Forge publish
-31ba302 ci: always manual trigger for publish workflow
-754f868 chore: bump version
-fd3ce16 ci: rename lint job to check
-3beb7f4 style: run Prettier
-370e7e9 fix: get app version with effect and transition
-705db45 style: run Prettier
-114ac4b Merge pull request #359 from LuanRoger/feat/auto-updater
+- 7c07650 feat: add GitHub publisher
+- afc67c0 ci: create workflow to publish release
+- 40741d1 Merge branch 'ci/publish-release'
+- 0c35a9a ci: explicit add GITHUB_TOKEN
+- dcd19d0 chore: bump version
+- 1d3c4d7 feat: add update checker
+- 269f3f3 feat: rename platform IPC to app
+- 65bf9a5 fix: document theme sync
+- b2c37b8 chore: add comment to Forge publish
+- 31ba302 ci: always manual trigger for publish workflow
+- 754f868 chore: bump version
+- fd3ce16 ci: rename lint job to check
+- 3beb7f4 style: run Prettier
+- 370e7e9 fix: get app version with effect and transition
+- 705db45 style: run Prettier
+- 114ac4b Merge pull request #359 from LuanRoger/feat/auto-updater

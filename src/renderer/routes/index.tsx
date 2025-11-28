@@ -1,6 +1,8 @@
 import { SiElectron, SiReact, SiVite } from '@icons-pack/react-simple-icons';
 import { createFileRoute } from '@tanstack/react-router';
+import { useEffect, useState, useTransition } from 'react';
 import { useTranslation } from 'react-i18next';
+import { getAppVersion } from '@/actions/app';
 import LangToggle from '@/components/LangToggle';
 import NavigationMenu from '@/components/navigation-menu';
 import ToggleTheme from '@/components/ToggleTheme';
@@ -11,6 +13,10 @@ import ToggleTheme from '@/components/ToggleTheme';
 function HomePage() {
   const iconSize = 48;
   const { t } = useTranslation();
+  const [appVersion, setAppVersion] = useState('0.0.0');
+  const [, startGetAppVersion] = useTransition();
+
+  useEffect(() => startGetAppVersion(() => getAppVersion().then(setAppVersion)), []);
 
   return (
     <>
@@ -31,9 +37,9 @@ function HomePage() {
           <LangToggle />
           <ToggleTheme />
         </div>
-        <footer className="font-tomorrow text-muted-foreground inline-flex justify-between text-[0.7rem] uppercase">
+        <footer className="font-tomorrow text-muted-foreground flex justify-between text-[0.7rem] uppercase">
           <p>Made by LuanRoger - Based in Brazil 🇧🇷</p>
-          <p>Powered by Electron</p>
+          <p>Version: {appVersion}</p>
         </footer>
       </div>
     </>

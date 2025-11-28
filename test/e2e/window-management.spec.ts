@@ -62,7 +62,7 @@ test.describe('Window Management', () => {
     await page.waitForSelector('h1');
 
     // Verify page content is visible and interactive
-    const pageTitle = await page.getByTestId('pageTitle');
+    const pageTitle = page.getByTestId('pageTitle');
     const text = await pageTitle.textContent();
     expect(text).toBe('Home Page');
   });
