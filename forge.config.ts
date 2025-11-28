@@ -13,6 +13,23 @@ const config: ForgeConfig = {
   },
   rebuildConfig: {},
   makers: [new MakerSquirrel({}), new MakerZIP({}, ['darwin']), new MakerRpm({}), new MakerDeb({})],
+  publishers: [
+    {
+      /*
+       * Publish release on GitHub as draft.
+       * Remember to manually publish it on GitHub website after verifying everything is correct.
+       */
+      name: '@electron-forge/publisher-github',
+      config: {
+        repository: {
+          owner: 'LionChenA',
+          name: 'electron-shadcn',
+        },
+        draft: true,
+        prerelease: false,
+      },
+    },
+  ],
   plugins: [
     new VitePlugin({
       build: [
