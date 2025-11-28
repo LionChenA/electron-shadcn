@@ -1,9 +1,11 @@
 import { createRootRoute, Outlet } from '@tanstack/react-router';
 import BaseLayout from '@/layouts/BaseLayout';
 
-export const Route = createRootRoute({
-  component: Root,
-});
+/* import { TanStackRouterDevtools } from '@tanstack/react-router-devtools' */
+
+/*
+ * Uncomment the code in this file to enable the router devtools.
+ */
 
 function Root() {
   return (
@@ -12,3 +14,7 @@ function Root() {
     </BaseLayout>
   );
 }
+
+export const Route = createRootRoute({
+  component: Root,
+});

@@ -84,7 +84,7 @@ The commits are grouped into chronological stages of development.
 # This stage focuses on improving the project's structure, standardizing
 # file naming conventions, and refactoring component organization.
 
-8c47620 refactor: insert template components into pages
+- 8c47620 refactor: insert template components into pages
 6e2351a refactor: define a pattern to file names
 a822387 feat: create platform RPC call
 f8a8537 chore: update structure on README
