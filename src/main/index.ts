@@ -1,7 +1,6 @@
 import path from 'node:path';
 import { app, BrowserWindow, ipcMain } from 'electron';
 import { installExtension, REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
-import { updateElectronApp } from 'update-electron-app';
 import { ipcContext } from '@/main/ipc/context';
 import { IPC_CHANNELS } from '@/shared/constants';
 
@@ -42,12 +41,6 @@ async function installExtensions() {
   }
 }
 
-function checkForUpdates() {
-  updateElectronApp({
-    repo: 'LionChenA/electron-shadcn',
-  });
-}
-
 async function setupORPC() {
   const { rpcHandler } = await import('@/main/ipc/handler');
   ipcMain.on(IPC_CHANNELS.START_ORPC_SERVER, (event) => {
@@ -58,7 +51,7 @@ async function setupORPC() {
   });
 }
 
-app.whenReady().then(createWindow).then(installExtensions).then(checkForUpdates).then(setupORPC);
+app.whenReady().then(createWindow).then(installExtensions).then(setupORPC);
 
 //osX only
 app.on('window-all-closed', () => {
