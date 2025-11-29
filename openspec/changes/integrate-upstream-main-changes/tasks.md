@@ -44,11 +44,11 @@ This plan integrates changes by applying them in chronologically ordered stages,
 
 ### Phase 8: Final Architectural Refactoring (Post-Merge)
 
-12. [ ] **Isolate IPC Handlers**: Move `theme` and `window` IPC handlers from `src/shared/ipc` to `src/main/ipc`.
-13. [ ] **Isolate Main-Process Context**: Move `context.ts` and `handler.ts` from `src/shared/ipc` to `src/main/ipc`.
-14. [ ] **Centralize Router Implementation**: Create `src/main/ipc/router.ts` to compose all handlers and export the `AppRouter` type.
-15. [ ] **Isolate IPC Client**: Move `manager.ts` from `src/shared/ipc` to a new `src/renderer/ipc` directory.
-16. [ ] **Create Shared Type Definition**: Modify `src/shared/ipc/router.ts` to only re-export the `AppRouter` type from `main`.
-17. [ ] **Update Client Implementation**: Update the new `manager.ts` to use `createORPCClient<AppRouter>`.
-18. [ ] **Update All Imports**: Go through the codebase and fix all import paths related to the moved IPC files.
-19. [ ] **Validate**: Run `tsc`, `test`, and `lint` to ensure all checks pass after the refactoring.
+12. [x] **Isolate IPC Handlers**: Move `theme` and `window` IPC handlers from `src/shared/ipc` to `src/main/ipc`.
+13. [x] **Isolate Main-Process Context**: Move `context.ts` and `handler.ts` from `src/shared/ipc` to `src/main/ipc`.
+14. [x] **Centralize Router Implementation**: Create `src/main/ipc/router.ts` to compose all handlers and export the `AppRouter` type.
+15. [x] **Isolate IPC Client**: Move `manager.ts` from `src/shared/ipc` to a new `src/renderer/ipc` directory.
+16. [x] **Create Shared Type Definition**: Modify `src/shared/ipc/router.ts` to only re-export the `AppRouter` type from `main`.
+17. [x] **Update Client Implementation**: Update the new `manager.ts` to use `createORPCClient<AppRouter>`.
+18. [x] **Update All Imports**: Go through the codebase and fix all import paths related to the moved IPC files.
+19. [x] **Validate**: Run `tsc`, `test`, and `lint` to ensure all checks pass after the refactoring.
