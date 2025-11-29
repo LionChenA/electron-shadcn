@@ -99,9 +99,17 @@ src/
 
 **Key Architectural Patterns:**
 
-1. **IPC Communication**: Structured via channels in `src/shared/ipc/`
-   - Theme management: `theme-mode:*` channels
-   - Window management: `window:*` channels
+1.  **IPC Architecture (oRPC)**: The project uses a type-safe, modular IPC architecture powered by [oRPC](https://github.com/LuanRoger/oRPC) over Electron's `MessageChannel`. This ensures that all communication between the main and renderer processes is fully typed and performant.
+    *   **`src/main/ipc/`**: This is the **exclusive home for all IPC server-side logic**.
+        *   **Handlers**: Individual procedures are defined in `handlers.ts` files within feature-specific subdirectories (e.g., `app/`, `theme/`, `window/`).
+        *   **Router**: `src/main/ipc/router.ts` aggregates all handlers into a single `router` object and exports the master `AppRouter` type, which defines the entire API contract.
+        *   **Server**: `src/main/ipc/handler.ts` creates the `RPCHandler` instance from the router.
+        *   **Context**: `src/main/ipc/context.ts` provides context (like the main `BrowserWindow`) to handlers that need it.
+    *   **`src/shared/ipc/`**: This directory's sole IPC-related role is to **share the `AppRouter` type**.
+        *   `src/shared/ipc/router.ts` re-exports the `AppRouter` type from the main process: `export type { AppRouter } from '@/main/ipc/router';`. This allows the renderer to import the type without bundling any main-process code.
+    *   **`src/renderer/ipc/`**: This directory contains the **client-side IPC setup**.
+        *   `src/renderer/ipc/manager.ts` creates the oRPC client, typed with the `AppRouter` imported from `shared`, providing end-to-end type safety.
+    *   **`src/preload/`**: The preload script securely bridges the two processes by exposing the necessary `ipcRenderer` functionality to transfer the `MessagePort` that establishes the oRPC connection.
 
 2. **File-Based Routing**: TanStack Router with auto-generated route tree
    - Routes in `src/renderer/routes/*.tsx`
