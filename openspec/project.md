@@ -109,17 +109,18 @@ src/
         *   `src/shared/ipc/router.ts` re-exports the `AppRouter` type from the main process: `export type { AppRouter } from '@/main/ipc/router';`. This allows the renderer to import the type without bundling any main-process code.
     *   **`src/renderer/ipc/`**: This directory contains the **client-side IPC setup**.
         *   `src/renderer/ipc/manager.ts` creates the oRPC client, typed with the `AppRouter` imported from `shared`, providing end-to-end type safety.
-    *   **`src/preload/`**: The preload script securely bridges the two processes by exposing the necessary `ipcRenderer` functionality to transfer the `MessagePort` that establishes the oRPC connection.
+    *   **`src/preload/`**: This script acts as the secure bridge during the initial IPC handshake. Its sole responsibility is to receive a `MessagePort` from the renderer process and securely forward it to the main process using `ipcRenderer`.
+
+    *   **IPC Handshake Process**: The connection is established through a precise three-step process:
+        1.  **Renderer (`src/renderer/ipc/manager.ts`)**: The `IPCManager` creates a `MessageChannel` and sends one of its ports to the preload script via `window.postMessage`.
+        2.  **Preload (`src/preload/index.ts`)**: The script listens for this message, extracts the port, and forwards it to the main process using `ipcRenderer.postMessage`.
+        3.  **Main (`src/main/index.ts`)**: An `ipcMain.on` listener in the main process receives the port and connects it to the oRPC server using `rpcHandler.upgrade()`, establishing the direct communication channel.
 
 2. **File-Based Routing**: TanStack Router with auto-generated route tree
    - Routes in `src/renderer/routes/*.tsx`
    - Auto-generated `routeTree.gen.ts`
 
-3. **Context Isolation**: Preload scripts expose controlled APIs via `contextBridge`
-   - Theme API: `window.themeMode`
-   - Window API: `window.windowControls`
-
-4. **Security Hardening**:
+3. **Security Hardening**:
    - Context isolation enabled
    - Electron Fuses configured
    - ASAR packaging enabled
@@ -221,7 +222,6 @@ This is a **desktop application template** designed for developers who want to b
 
 **Security Constraints:**
 - Context isolation must remain enabled
-- Preload scripts must use `contextBridge` - direct `window` access forbidden
 - IPC channels must be typed and validated
 - Electron Fuses security features must remain enabled
 - No external scripts or eval() usage
