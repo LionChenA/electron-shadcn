@@ -5,5 +5,5 @@
     "lib": ["ESNext", "DOM"]
   },
   "include": ["./**/*", "../types.d.ts"],
-  "references": [{ "path": "../main" }]
+  "references": []
 }

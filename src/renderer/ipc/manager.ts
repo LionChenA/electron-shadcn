@@ -1,7 +1,7 @@
 import { createORPCClient, type ORPCClient } from '@orpc/client';
 import { RPCLink } from '@orpc/client/message-port';
+import type { AppRouter } from '@/main/ipc/router';
 import { IPC_CHANNELS } from '@/shared/constants';
-import type { AppRouter } from '@/shared/ipc/router';
 
 class IPCManager {
   private readonly clientPort: MessagePort;
