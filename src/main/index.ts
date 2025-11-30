@@ -2,6 +2,7 @@ import path from 'node:path';
 import { app, BrowserWindow, ipcMain } from 'electron';
 import { installExtension, REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 import { ipcContext } from '@/main/ipc/context';
+import { router } from '@/main/ipc/router';
 import { IPC_CHANNELS } from '@/shared/constants';
 
 const inDevelopment = process.env.NODE_ENV === 'development';
@@ -47,7 +48,7 @@ async function setupORPC() {
     const [serverPort] = event.ports;
 
     serverPort.start();
-    rpcHandler.upgrade(serverPort);
+    rpcHandler.upgrade(serverPort, { context: router });
   });
 }
 

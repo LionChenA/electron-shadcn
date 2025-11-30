@@ -1,5 +1,6 @@
-import { createORPCClient, type ORPCClient } from '@orpc/client';
+import { createORPCClient } from '@orpc/client';
 import { RPCLink } from '@orpc/client/message-port';
+import type { RouterClient } from '@orpc/server';
 import type { AppRouter } from '@/main/ipc/router';
 import { IPC_CHANNELS } from '@/shared/constants';
 
@@ -7,8 +8,8 @@ class IPCManager {
   private readonly clientPort: MessagePort;
   private readonly serverPort: MessagePort;
 
-  private readonly rpcLink: RPCLink;
-  public readonly client: ORPCClient<AppRouter>;
+  private readonly rpcLink: RPCLink<AppRouter>;
+  public readonly client: RouterClient<AppRouter>;
   private initialized: boolean = false;
 
   constructor() {
@@ -20,7 +21,7 @@ class IPCManager {
       port: this.clientPort,
     });
 
-    this.client = createORPCClient<AppRouter>(this.rpcLink);
+    this.client = createORPCClient(this.rpcLink) as unknown as RouterClient<AppRouter>;
   }
 
   public initialize() {

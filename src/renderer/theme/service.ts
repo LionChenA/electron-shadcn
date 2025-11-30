@@ -1,5 +1,5 @@
+import { ipc } from '@/renderer/ipc/manager';
 import type { ThemeMode } from '@/shared/types/themeMode';
-import { ipc } from '../../helpers/ipc/manager';
 
 const THEME_KEY = 'theme';
 
