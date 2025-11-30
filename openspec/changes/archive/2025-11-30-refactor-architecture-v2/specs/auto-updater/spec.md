@@ -1,4 +1,4 @@
-## MODIFIED Requirements
+## ADDED Requirements
 
 ### Requirement: The application SHALL provide an on-demand mechanism to check for updates
 

@@ -12,8 +12,6 @@ Instructions for AI coding assistants using OpenSpec for spec-driven development
 - Validate: `openspec validate [change-id] --strict` and fix issues
 - Request approval: Do not start implementation until proposal is approved
 
-## Project-Specific Conventions
-
 ## Three-Stage Workflow
 
 ### Stage 1: Creating Changes
