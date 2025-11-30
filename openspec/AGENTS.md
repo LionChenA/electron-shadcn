@@ -48,13 +48,15 @@ Skip proposal for:
 
 ### Stage 2: Implementing Changes
 Track these steps as TODOs and complete them one by one.
-1. **Read proposal.md** - Understand what's being built
-2. **Read design.md** (if exists) - Review technical decisions
-3. **Read tasks.md** - Get implementation checklist
-4. **Implement tasks sequentially** - Complete in order
-5. **Confirm completion** - Ensure every item in `tasks.md` is finished before updating statuses
-6. **Update checklist** - After all work is done, set every task to `- [x]` so the list reflects reality
-7. **Approval gate** - Do not start implementation until the proposal is reviewed and approved
+1. **Read proposal.md** - Understand what's being built.
+2. **Read design.md** (if exists) - Review technical decisions.
+3. **Read tasks.md** - Get implementation checklist.
+4. **Implement and Commit Tasks**: For each task, implement the changes and run local validation (e.g., unit tests, `tsc`). Create an atomic commit for the logical change.
+5. **Update Status and Record Outcomes**: After completing a task's implementation, update `tasks.md`:
+    - Mark the task as complete by changing `[ ]` to `[x]`.
+    - **Optionally**, add indented notes (`NOTE:`, `ISSUE:`, `DEVIATION:`) below the task to document important outcomes or unexpected issues. If no notes are present, the task is assumed to have been completed as planned.
+    - **Commit the `tasks.md` file changes**. This is crucial for traceability and should be done with the final code commit for that task.
+6. **Approval gate** - Do not start implementation until the proposal is reviewed and approved.
 
 ### Stage 3: Archiving Changes
 After deployment, create separate PR to:
@@ -196,12 +198,14 @@ The system SHALL provide...
 If multiple capabilities are affected, create multiple delta files under `changes/[change-id]/specs/<capability>/spec.md`—one per capability.
 
 4. **Create tasks.md:**
+   Break down the implementation into a granular checklist. A task should represent a single logical unit of work, small enough for easy review. The list must also include explicit testing and validation steps.
+
 ```markdown
 ## 1. Implementation
-- [ ] 1.1 Create database schema
-- [ ] 1.2 Implement API endpoint
-- [ ] 1.3 Add frontend component
-- [ ] 1.4 Write tests
+- [ ] 1.1 Refactor auth service to `src/main/auth/service.ts`.
+- [ ] 1.2 Add Vitest unit tests for the new service.
+- [ ] 1.3 Verify changes with a full type-check (`tsc -b`).
+- [ ] 1.4 Update the frontend component to use the new service.
 ```
 
 5. **Create design.md when needed:**
