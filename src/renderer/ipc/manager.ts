@@ -8,7 +8,7 @@ class IPCManager {
   private readonly clientPort: MessagePort;
   private readonly serverPort: MessagePort;
 
-  private readonly rpcLink: RPCLink<AppRouter>;
+  private readonly rpcLink: RPCLink<Record<never, never>>;
   public readonly client: RouterClient<AppRouter>;
   private initialized: boolean = false;
 
@@ -17,11 +17,11 @@ class IPCManager {
     this.clientPort = clientChannelPort;
     this.serverPort = serverChannelPort;
 
-    this.rpcLink = new RPCLink({
+    this.rpcLink = new RPCLink<Record<never, never>>({
       port: this.clientPort,
     });
 
-    this.client = createORPCClient(this.rpcLink) as unknown as RouterClient<AppRouter>;
+    this.client = createORPCClient<RouterClient<AppRouter>>(this.rpcLink);
   }
 
   public initialize() {

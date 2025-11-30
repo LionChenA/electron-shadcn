@@ -26,6 +26,6 @@ Based on the research documented in `doc/orpc.md`, this phase will resolve all r
 - [x] 3.2. **Fix Client Type**: In `src/renderer/ipc/manager.ts`, remove the incorrect `ORPCClient` import and type the client property correctly with `RouterClient` imported from `@orpc/server`.
 - [x] 3.3. **Fix IPC Calls**: Revert all incorrect `.query()` and `.mutate()` calls in `src/renderer/actions/` and `src/renderer/theme/service.ts`, using direct async calls as documented in `doc/orpc.md`.
 - [x] 3.4. **Fix Implicit 'any'**: Add explicit types for promise handlers in `src/renderer/components/DragWindowRegion.tsx`.
-- [ ] 3.5. **Final Validation**: Run `pnpm tsc -b --force` and confirm that it completes with **zero** errors.
-- [ ] 3.6. **Commit**: Create a final commit for all the type fixes.
-- [ ] 3.7. **Regression Testing**: Run `pnpm test:all` to ensure the refactoring has not introduced any regressions.
+- [x] 3.5. **Final Validation**: Run `pnpm tsc -b --force` and confirm that it completes with **zero** errors.
+- [x] 3.6. **Commit**: Create a final commit for all the type fixes.
+- [x] 3.7. **Regression Testing**: Run `pnpm test:all` to ensure the refactoring has not introduced any regressions.
