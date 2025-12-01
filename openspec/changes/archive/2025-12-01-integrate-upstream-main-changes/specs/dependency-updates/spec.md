@@ -2,7 +2,7 @@
 
 ### Requirement: Update project dependencies to specified versions
 
-All runtime and development dependencies must be updated to match the versions specified in the `changes.txt` file, which were sourced from the `upstream/main` branch.
+All runtime and development dependencies SHALL be updated to match the versions specified in the `changes.txt` file, which were sourced from the `upstream/main` branch.
 
 #### Scenario: Verify dependency versions after installation
 - **Given** the dependency update commits have been applied to `package.json`.

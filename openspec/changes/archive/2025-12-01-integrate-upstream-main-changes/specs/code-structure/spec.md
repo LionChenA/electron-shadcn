@@ -2,7 +2,7 @@
 
 ### Requirement: Adhere to standardized file naming conventions
 
-Project files must be renamed to follow the new, consistent pattern introduced in the `upstream/main` branch.
+Project files SHALL be renamed to follow the new, consistent pattern introduced in the `upstream/main` branch.
 
 #### Scenario: Verify file names post-refactoring
 - **Given** the code structure refactoring commits have been applied.
@@ -10,7 +10,7 @@ Project files must be renamed to follow the new, consistent pattern introduced i
 - **Then** the files are named according to the new convention (e.g., `feature.action.ts`, `Component.tsx`).
 
 ### Requirement: Refactor component organization
-Template components should be properly integrated into their respective page components.
+Template components SHALL be properly integrated into their respective page components.
 
 #### Scenario: Review component structure
 - **Given** the application is running.

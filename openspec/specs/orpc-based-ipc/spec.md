@@ -60,3 +60,19 @@ New IPC procedures SHALL be added modularly without changing handshake, client s
 - **When** developer adds handler to new/existing feature module and updates router
 - **Then** `pnpm tsc -b` succeeds, client auto-completes `ipc.client.<feature>.<procedure>()`, calls work end-to-end
 
+### Requirement: Verify End-to-End Type Safety
+A robust Inter-Process Communication system SHALL ensure end-to-end type safety between the `main`, `preload`, and `renderer` processes via `import type { AppRouter }` from `@/main/ipc/router`.
+
+#### Scenario: Type mismatch causes a compilation error
+- **Given** an IPC endpoint defined in main handlers and exported via `AppRouter`.
+- **When** a developer introduces a type mismatch in a handler (e.g., argument from `string` to `number`).
+- **Then** `pnpm tsc -b` results in a compile-time error.
+
+### Requirement: Confirm Feature Migration to oRPC
+Existing `theme` and `window` features SHALL use oRPC handlers, with legacy IPC removed.
+
+#### Scenario: Theme toggle via oRPC
+- **Given** the application is running.
+- **When** user clicks theme toggle.
+- **Then** theme changes via `ipc.client.theme.toggleTheme()`, legacy handlers absent.
+

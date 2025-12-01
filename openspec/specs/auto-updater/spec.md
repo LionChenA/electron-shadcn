@@ -1,14 +1,25 @@
 # auto-updater Specification
 
 ## Purpose
-TBD - created by archiving change refactor-architecture-v2. Update Purpose after archive.
+Production-ready auto-updates: on-demand/startup checks via IPC, with GitHub CI/CD publishing support.
 ## Requirements
-### Requirement: The application SHALL provide an on-demand mechanism to check for updates
+### Requirement: Application SHALL support configurable update checks
 
-The application's auto-update functionality MUST be exposed as an IPC procedure that can be triggered at any time, rather than running automatically only at startup.
+The application SHALL expose IPC for on-demand checks and perform automatic checks on startup or via UI trigger.
 
-#### Scenario: Manually trigger an update check via IPC
-- **Given** the application is running.
-- **When** a developer or a UI element triggers the `app.checkForUpdates` IPC procedure.
-- **Then** the main process console logs a message indicating that an update check has been performed against the GitHub repository.
+#### Scenario: Update check (on-demand or startup)
+- **Given** the application is running or launching (production build).
+- **When** `app.checkForUpdates` IPC is called or app starts.
+- **Then** main process logs confirm GitHub repo check.
+
+### Requirement: Implement a CI/CD workflow for publishing releases
+
+A GitHub Actions workflow SHALL be in place to automate the building and publishing of new application releases to GitHub.
+
+#### Scenario: Manually trigger a new release
+- **Given** the `publish-release` workflow exists in `.github/workflows/`.
+- **When** a developer with appropriate permissions manually triggers the workflow from the GitHub Actions tab.
+- **Then** the workflow job runs successfully.
+- **And** a new release is created on the project's GitHub Releases page.
+- **And** the release includes the platform-specific application artifacts (e.g., `.dmg`, `.exe`).
 

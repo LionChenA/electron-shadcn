@@ -2,7 +2,7 @@
 
 ### Requirement: Establish a centralized, type-safe IPC mechanism
 
-A robust Inter-Process Communication system must be implemented that ensures end-to-end type safety between the `main`, `preload`, and `renderer` processes, based on the "Centralized Shared Types" model.
+A robust Inter-Process Communication system SHALL be implemented that ensures end-to-end type safety between the `main`, `preload`, and `renderer` processes, based on the "Centralized Shared Types" model.
 
 #### Scenario: Type mismatch causes a compilation error
 - **Given** an IPC endpoint's type signature is defined in `src/shared/ipc/types.ts`.
@@ -13,7 +13,7 @@ A robust Inter-Process Communication system must be implemented that ensures end
 
 ### Requirement: Migrate existing features to the new typed IPC system
 
-The existing `theme` and `window` management features must be migrated from their legacy implementation to the new "oRPC" framework.
+The existing `theme` and `window` management features SHALL be migrated from their legacy implementation to the new "oRPC" framework.
 
 #### Scenario: User toggles the application theme
 - **Given** the application is running.

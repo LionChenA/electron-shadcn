@@ -38,8 +38,8 @@ This plan integrates changes by applying them in chronologically ordered stages,
 
 8.  [x] **Linters & Formatters**: Run `pnpm format` and `pnpm lint` and fix all issues.
 9.  [x] **Automated Testing**: Execute the entire test suite and ensure 100% pass rate.
-10. [ ] **Manual Smoke Test**: Perform a full manual test of all integrated features, especially theme-switching and window management via oRPC.
-11. [ ] **Review**: Open a Pull Request.
+10. [x] **Manual Smoke Test**: Perform a full manual test of all integrated features, especially theme-switching and window management via oRPC.
+11. [x] **Review**: Open a Pull Request.
 12. [x] **Codify IPC Architecture**: Add a new rule to `openspec/AGENTS.md` to enforce the new environment-isolated IPC architecture.
 
 ### Phase 8: Final Architectural Refactoring (Post-Merge)

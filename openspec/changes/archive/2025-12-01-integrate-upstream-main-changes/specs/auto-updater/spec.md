@@ -2,7 +2,7 @@
 
 ### Requirement: Implement application auto-update checks
 
-The application must automatically check for new releases upon startup.
+The application SHALL automatically check for new releases upon startup.
 
 #### Scenario: Check for updates on application launch
 - **Given** the application is packaged for production.
@@ -11,7 +11,7 @@ The application must automatically check for new releases upon startup.
 
 ### Requirement: Implement a CI/CD workflow for publishing releases
 
-A GitHub Actions workflow must be in place to automate the building and publishing of new application releases to GitHub.
+A GitHub Actions workflow SHALL be in place to automate the building and publishing of new application releases to GitHub.
 
 #### Scenario: Manually trigger a new release
 - **Given** the `publish-release` workflow exists in `.github/workflows/`.
