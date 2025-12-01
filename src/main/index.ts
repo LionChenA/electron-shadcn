@@ -17,7 +17,6 @@ function createWindow() {
       contextIsolation: true,
       nodeIntegration: false,
       nodeIntegrationInSubFrames: false,
-
       preload: preload,
     },
     titleBarStyle: process.platform === 'darwin' ? 'hiddenInset' : 'hidden',
@@ -42,6 +41,15 @@ async function installExtensions() {
   }
 }
 
+/**
+ * oRPC Handshake Completion (Main Process):
+ * 1. Listens ipcMain.on(IPC_CHANNELS.START_ORPC_SERVER) for port from preload.
+ * 2. Upgrades port with rpcHandler, injecting ipcContext for handler access (e.g., BrowserWindow).
+ * 3. serverPort.start() activates bidirectional MessageChannel.
+ *
+ * Flow: Renderer → Preload → Main (this listener).
+ * See doc/orpc.md for full handshake.
+ */
 async function setupORPC() {
   const { rpcHandler } = await import('@/main/ipc/handler');
   ipcMain.on(IPC_CHANNELS.START_ORPC_SERVER, (event) => {
