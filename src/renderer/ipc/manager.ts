@@ -1,3 +1,19 @@
+/**
+ * oRPC Client Manager (Renderer Process):
+ *
+ * - Creates MessageChannel: keeps clientPort, sends serverPort to preload via postMessage.
+ * - RPCLink over clientPort for transport.
+ * - createORPCClient<AppRouter> provides fully-typed proxy: ipc.client.<feature>.<procedure>()
+ *
+ * Type Flow:
+ * 1. Main exports type AppRouter = typeof router
+ * 2. import type { AppRouter } from '@/main/ipc/router' (erased at runtime)
+ * 3. RouterClient<AppRouter> generic ensures end-to-end safety.
+ *
+ * Usage: await ipc.client.app.getAppVersion()
+ *
+ * Reference: openspec/changes/document-orpc-architecture/
+ */
 import { createORPCClient } from '@orpc/client';
 import { RPCLink } from '@orpc/client/message-port';
 import type { RouterClient } from '@orpc/server';

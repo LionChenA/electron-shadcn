@@ -1,3 +1,12 @@
+/**
+ * oRPC IPC Context: Provides main-window access to handlers.
+ *
+ * - Injected at upgrade: rpcHandler.upgrade(port, { context: ipcContext })
+ * - mainWindowContext middleware: os.middleware injecting { window: BrowserWindow }
+ * - Usage in handlers: os.use(ipcContext.mainWindowContext).handler(({ context }) => ...)
+ *
+ * Ensures handlers are window-aware without globals.
+ */
 import { os } from '@orpc/server';
 import type { BrowserWindow } from 'electron';
 

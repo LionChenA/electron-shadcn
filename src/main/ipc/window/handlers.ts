@@ -1,3 +1,9 @@
+/**
+ * Window IPC Procedures: Use ipcContext.mainWindowContext for BrowserWindow access.
+ *
+ * Client call: await ipc.client.window.minimizeWindow()
+ * Context injected automatically via router/os.use chain.
+ */
 import { os } from '@orpc/server';
 import type { BrowserWindow } from 'electron';
 import { ipcContext } from '../context';
