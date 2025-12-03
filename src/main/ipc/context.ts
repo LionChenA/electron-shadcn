@@ -23,20 +23,6 @@ class IPCContext {
     }
     return this.mainWindow;
   }
-
-  public get mainWindowContext() {
-    const window = this.requireMainWindow();
-
-    return os.middleware(({ next }) =>
-      next({
-        context: {
-          window,
-        } as {
-          window: BrowserWindow;
-        },
-      }),
-    );
-  }
 }
 
 export const ipcContext = new IPCContext();
