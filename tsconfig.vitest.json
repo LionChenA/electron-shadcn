@@ -2,8 +2,20 @@
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "outDir": "dist",
-    "types": ["vitest/globals", "vitest/importMeta", "vitest/jsdom", "vitest/browser"]
+    "types": [
+      "vitest/globals",
+      "vitest/importMeta",
+      "vitest/jsdom",
+      "vitest/browser",
+      "@testing-library/jest-dom"
+    ]
   },
-  "include": ["src/**/*", "test/integration/**/*", "*.config.*", ".storybook/**/*"],
+  "include": [
+    "src/**/*",
+    "test/integration/**/*",
+    "test/vitest.setup.ts",
+    "*.config.*",
+    ".storybook/**/*"
+  ],
   "exclude": ["test/e2e/**/*"]
 }
