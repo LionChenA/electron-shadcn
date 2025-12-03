@@ -22,9 +22,9 @@ This proposal outlines a two-phased plan to enhance the application's architectu
 The implementation will be staged to ensure a clean separation of concerns:
 
 1.  **IPC Infrastructure**:
-    *   A new generic `publisher` will be added to the main process to handle event broadcasting.
-    *   A new generic oRPC streaming endpoint (e.g., `events.on`) will be created to expose server-sent events to the client.
-    *   A corresponding client-side hook (`useSubscription`) will be created to easily subscribe to these events in React components.
+    *   A new generic `MemoryPublisher` will be added to the main process to handle event broadcasting.
+    *   A new **specific** oRPC streaming endpoint (`app.onUpdateStatus`) will be created to expose server-sent events to the client.
+    *   The client-side `useSWRSubscription` hook (wrapped by `createSWRUtils` from `@orpc/experimental-react-swr`) will be used to easily subscribe to these events in React components.
 
 2.  **Updater Feature**:
     *   The main process `autoUpdater` will be refactored to publish status events using the new `publisher`.

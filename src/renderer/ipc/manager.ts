@@ -14,8 +14,10 @@
  *
  * Reference: openspec/changes/document-orpc-architecture/
  */
+
 import { createORPCClient } from '@orpc/client';
 import { RPCLink } from '@orpc/client/message-port';
+import { createSWRUtils } from '@orpc/experimental-react-swr';
 import type { RouterClient } from '@orpc/server';
 import type { AppRouter } from '@/main/ipc/router';
 import { IPC_CHANNELS } from '@/shared/constants';
@@ -52,5 +54,14 @@ class IPCManager {
   }
 }
 
+/**
+ * The raw oRPC client. Use this for one-off procedure calls outside of React components.
+ */
 export const ipc = new IPCManager();
 ipc.initialize();
+
+/**
+ * An SWR-aware oRPC client. Use this with SWR hooks (`useSWR`, `useSWRSubscription`)
+ * to integrate oRPC procedures with React's data fetching and state management.
+ */
+export const swrORPC = createSWRUtils(ipc.client);

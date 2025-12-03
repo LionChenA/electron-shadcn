@@ -43,6 +43,7 @@ sequenceDiagram
 *   **`MemoryPublisher` (@orpc/experimental-publisher)**: A singleton instance in the main process will act as a central, in-memory event bus. Any part of the main process (like the `autoUpdater` service) can publish events to it without being coupled to the IPC layer.
 *   **Streaming oRPC Endpoint (`async function*`)**: A dedicated oRPC handler (e.g., `app.onUpdateStatus`) will be an async generator. It will subscribe to the `MemoryPublisher` and use a `for await...of` loop to listen for events, `yield`-ing each one to the client as it arrives. This creates a long-lived, type-safe stream.
 *   **`useSWRSubscription`**: The client will use this hook (or a custom wrapper around it) to connect to the streaming endpoint. It will manage the lifecycle of the subscription, providing new data to the React component as it's pushed from the server.
+*   **`createSWRUtils` (@orpc/experimental-react-swr)**: This utility wraps the raw oRPC client to provide SWR-compatible methods (`.key()`, `.subscriber()`, etc.), enabling seamless and type-safe integration of oRPC procedures with React SWR hooks.
 
 ### 3. Feasibility and Risk Analysis
 
