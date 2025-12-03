@@ -10,6 +10,31 @@ import type { ForgeConfig } from '@electron-forge/shared-types';
 const config: ForgeConfig = {
   packagerConfig: {
     asar: true,
+    // --------------------------------------------------------------------------------
+    // --- PLACEHOLDER FOR MACOS CODE SIGNING ---
+    // To enable auto-updates on macOS, your application must be code-signed.
+    // This requires an Apple Developer account and is out of scope for this template.
+    //
+    // 1. Set up your environment variables (e.g., in a .env file):
+    //    APPLE_ID=your-apple-id@example.com
+    //    APPLE_ID_PASSWORD=your-app-specific-password
+    //    APPLE_TEAM_ID=YOUR_TEAM_ID
+    //
+    // 2. Ensure 'entitlements.mac.plist' exists in the project root.
+    //
+    // 3. Uncomment the osxSign block below.
+    //
+    // For more details, see the Electron Forge documentation on macOS signing.
+    // --------------------------------------------------------------------------------
+    /*
+    osxSign: {
+      identity: `Developer ID Application: YOUR_NAME (YOUR_TEAM_ID)`,
+      'hardened-runtime': true,
+      'gatekeeper-assess': false,
+      entitlements: 'entitlements.mac.plist',
+      'entitlements-inherit': 'entitlements.mac.plist',
+    },
+    */
   },
   rebuildConfig: {},
   makers: [new MakerSquirrel({}), new MakerZIP({}, ['darwin']), new MakerRpm({}), new MakerDeb({})],
