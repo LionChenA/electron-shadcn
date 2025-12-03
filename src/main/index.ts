@@ -1,7 +1,9 @@
 import path from 'node:path';
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, autoUpdater, BrowserWindow, ipcMain } from 'electron';
 import { installExtension, REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
+import { updateElectronApp } from 'update-electron-app';
 import { ipcContext } from '@/main/ipc/context';
+import { publisher } from '@/main/ipc/publisher';
 import { router } from '@/main/ipc/router';
 import { IPC_CHANNELS } from '@/shared/constants';
 
@@ -43,11 +45,6 @@ async function installExtensions() {
 
 /**
  * oRPC Handshake Completion (Main Process):
- * 1. Listens ipcMain.on(IPC_CHANNELS.START_ORPC_SERVER) for port from preload.
- * 2. Upgrades port with rpcHandler, injecting ipcContext for handler access (e.g., BrowserWindow).
- * 3. serverPort.start() activates bidirectional MessageChannel.
- *
- * Flow: Renderer → Preload → Main (this listener).
  * See doc/orpc.md for full handshake.
  */
 async function setupORPC() {
@@ -60,7 +57,43 @@ async function setupORPC() {
   });
 }
 
-app.whenReady().then(createWindow).then(installExtensions).then(setupORPC);
+/**
+ * Configures the auto-updater and sets up listeners to publish status
+ * events to the central event bus (publisher).
+ */
+async function setupUpdater() {
+  try {
+    updateElectronApp({
+      notifyUser: false,
+    });
+    console.log('Updater configured.');
+
+    autoUpdater.on('checking-for-update', () => {
+      publisher.publish('updater:status', { status: 'checking' });
+    });
+
+    autoUpdater.on('update-available', () => {
+      publisher.publish('updater:status', { status: 'available' });
+    });
+
+    autoUpdater.on('update-not-available', () => {
+      publisher.publish('updater:status', { status: 'not-available' });
+    });
+
+    autoUpdater.on('update-downloaded', () => {
+      publisher.publish('updater:status', { status: 'downloaded' });
+    });
+
+    autoUpdater.on('error', (error) => {
+      console.error('Updater Error:', error);
+      publisher.publish('updater:status', { status: 'error', message: error.message });
+    });
+  } catch (error) {
+    console.error('Failed to setup updater:', error);
+  }
+}
+
+app.whenReady().then(createWindow).then(installExtensions).then(setupORPC).then(setupUpdater);
 
 //osX only
 app.on('window-all-closed', () => {
