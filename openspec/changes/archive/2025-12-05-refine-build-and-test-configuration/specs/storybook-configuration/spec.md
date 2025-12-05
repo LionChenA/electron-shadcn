@@ -8,7 +8,7 @@ This spec defines the integration of Storybook with the project's testing and de
 
 Storybook MUST be integrated with Vitest to enable automated component testing.
 
-- #### Scenario: Running a Story as a Test
+#### Scenario: Running a Story as a Test
   - **Given** the `@storybook/addon-vitest` is installed and configured.
   - **And** the `vitest.config.ts` contains a `storybook` project that uses the `storybookTest` plugin.
   - **When** a developer runs `npm run test:storybook`.
@@ -19,8 +19,17 @@ Storybook MUST be integrated with Vitest to enable automated component testing.
 
 Storybook's UI MUST provide a panel to display the results of Vitest tests.
 
-- #### Scenario: Viewing Test Results in Storybook
+#### Scenario: Viewing Test Results in Storybook
   - **Given** the `@storybook/addon-vitest` is configured.
   - **When** a developer runs Storybook and navigates to a component's story.
   - **Then** a "Test" panel MUST be available in the addons section.
   - **And** this panel MUST display the passing or failing status of the Vitest tests associated with that story.
+
+### Requirement: Automatic Test Discovery for Stories
+
+The Vitest `storybook` project configuration MUST rely on the `@storybook/addon-vitest` plugin for test discovery.
+
+#### Scenario: Configuring the Storybook Test Project
+  - **Given** the `storybook` project is defined in `vitest.config.ts`.
+  - **When** configuring the `test` property for this project.
+  - **Then** the `include` property MUST NOT be used, as the addon automatically discovers tests based on the `.storybook/main.ts` `stories` field.
