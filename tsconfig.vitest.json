@@ -11,11 +11,19 @@
     ]
   },
   "include": [
-    "src/**/*",
-    "test/integration/**/*",
-    "test/vitest.setup.ts",
-    "*.config.*",
-    ".storybook/**/*"
+    "src/**/*.d.ts",
+    "test/**/*.ts",
+    "vitest.config.ts",
+    ".storybook/**/*.ts",
+    "src/**/*.stories.{ts,tsx}"
   ],
-  "exclude": ["test/e2e/**/*"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "test/e2e",
+    "src/main",
+    "src/preload",
+    "src/renderer",
+    "src/shared"
+  ]
 }
