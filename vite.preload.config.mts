@@ -1,14 +1,16 @@
-import { defineConfig } from 'vite';
-import tsconfigPaths from 'vite-tsconfig-paths';
+import { defineConfig, mergeConfig } from 'vite';
+import baseConfig from './vite.base.config.mts';
 
 // https://vitejs.dev/config
-export default defineConfig({
-  plugins: [tsconfigPaths()],
-  build: {
-    rollupOptions: {
-      output: {
-        entryFileNames: 'preload.js',
+export default mergeConfig(
+  baseConfig,
+  defineConfig({
+    build: {
+      rollupOptions: {
+        output: {
+          entryFileNames: 'preload.js',
+        },
       },
     },
-  },
-});
+  }),
+);
