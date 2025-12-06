@@ -80,4 +80,13 @@ export default defineConfig({
       }),
     ],
   },
+  optimizeDeps: {
+    include: [
+      '@storybook/test',
+      'swr/subscription',
+      '@orpc/client',
+      '@orpc/experimental-react-swr',
+      'zustand',
+    ],
+  },
 });
