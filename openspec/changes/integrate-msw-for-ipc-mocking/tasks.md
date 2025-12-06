@@ -4,18 +4,18 @@ This is an ordered list of tasks to implement the new unified mocking infrastruc
 
 ### Phase 1: Configuration & Schemas
 
-*   [ ] **1. Configure TypeScript for Holistic Checking**:
+*   [x] **1. Configure TypeScript for Holistic Checking**:
     *   Update the root `tsconfig.json` to add project references to `./tsconfig.vitest.json` and `./tsconfig.playwright.json`.
     *   Update `tsconfig.vitest.json` to add the `"noEmit": true` and `"allowImportingTsExtensions": true` compiler options.
     *   *Validation*: Run `pnpm tsc -b` and confirm it attempts to type-check the `test` directory.
 
-*   [ ] **2. Install Core Dependencies**:
+*   [x] **2. Install Core Dependencies**:
     *   Install `msw` and `msw-storybook-addon`.
     *   Install Kubb and its plugins: `@kubb/core`, `@kubb/cli`, `@kubb/plugin-oas`, `@kubb/plugin-ts`, `@kubb/plugin-zod`, `@kubb/plugin-msw`, and `@kubb/plugin-faker`.
     *   Install the peer dependency for the faker plugin: `@faker-js/faker`.
     *   *Validation*: All dependencies are present in `package.json`.
 
-*   [ ] **3. Enforce Explicit Zod Schemas**:
+*   [x] **3. Enforce Explicit Zod Schemas**:
     *   Audit all oRPC handlers in `src/main/ipc/**/handlers.ts`.
     *   Add explicit `.input()` and/or `.output()` Zod schemas to every handler to ensure a complete OpenAPI specification.
     *   For streaming handlers, ensure the output schema is wrapped with the `eventIterator()` helper.
@@ -23,12 +23,12 @@ This is an ordered list of tasks to implement the new unified mocking infrastruc
 
 ### Phase 2: Code Generation
 
-*   [ ] **4. Create OpenAPI Generation Script**:
+*   [x] **4. Create OpenAPI Generation Script**:
     *   Create a script (`scripts/generate-openapi.ts`) that imports the oRPC `AppRouter` and uses `@orpc/openapi` to export a `test/mocks/openapi.json` schema file.
     *   Add a corresponding npm script to `package.json`: `"openapi:generate": "tsx scripts/generate-openapi.ts"`.
     *   *Validation*: Run the script and confirm `test/mocks/openapi.json` is created successfully.
 
-*   [ ] **5. Configure Kubb**:
+*   [x] **5. Configure Kubb**:
     *   Create a `kubb.config.ts` file in the project root.
     *   Configure the input to point to the generated `test/mocks/openapi.json`.
     *   Configure the output to generate files to `test/mocks/gen/`.

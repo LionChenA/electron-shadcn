@@ -1,12 +1,15 @@
 import { os } from '@orpc/server';
 import { nativeTheme } from 'electron';
+import * as z from 'zod'; // Import zod
 import { setThemeModeInputSchema } from './schemas';
 
-export const getCurrentThemeMode = os.handler(() => {
+const ThemeSourceSchema = z.union([z.literal('system'), z.literal('light'), z.literal('dark')]);
+
+export const getCurrentThemeMode = os.output(ThemeSourceSchema).handler(() => {
   return nativeTheme.themeSource;
 });
 
-export const toggleThemeMode = os.handler(() => {
+export const toggleThemeMode = os.output(z.boolean()).handler(() => {
   if (nativeTheme.shouldUseDarkColors) {
     nativeTheme.themeSource = 'light';
   } else {
@@ -16,18 +19,21 @@ export const toggleThemeMode = os.handler(() => {
   return nativeTheme.shouldUseDarkColors;
 });
 
-export const setThemeMode = os.input(setThemeModeInputSchema).handler(({ input: mode }) => {
-  switch (mode) {
-    case 'light':
-      nativeTheme.themeSource = 'light';
-      break;
-    case 'dark':
-      nativeTheme.themeSource = 'dark';
-      break;
-    case 'system':
-      nativeTheme.themeSource = 'system';
-      break;
-  }
+export const setThemeMode = os
+  .input(setThemeModeInputSchema)
+  .output(ThemeSourceSchema)
+  .handler(({ input: mode }) => {
+    switch (mode) {
+      case 'light':
+        nativeTheme.themeSource = 'light';
+        break;
+      case 'dark':
+        nativeTheme.themeSource = 'dark';
+        break;
+      case 'system':
+        nativeTheme.themeSource = 'system';
+        break;
+    }
 
-  return nativeTheme.themeSource;
-});
+    return nativeTheme.themeSource;
+  });
