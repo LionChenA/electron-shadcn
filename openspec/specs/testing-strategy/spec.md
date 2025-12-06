@@ -50,3 +50,13 @@ The `package.json` file MUST contain a standardized set of scripts for running t
   - **When** they execute `pnpm test:all`.
   - **Then** all Vitest projects AND the Playwright E2E tests MUST be executed.
 
+### Requirement: Centralized API/IPC Mocking
+
+All API and IPC mocking for unit and integration tests MUST be handled by Mock Service Worker (MSW).
+
+#### Scenario: Mocking a Backend API Call
+  - **Given** a component or handler makes a call to a backend API or IPC procedure.
+  - **When** the code is executed in a test environment (Vitest or Storybook).
+  - **Then** MSW MUST intercept the request and return a mocked response.
+  - **Reference:** `msw-integration/spec.md` for detailed setup and usage.
+

@@ -16,6 +16,7 @@
  */
 
 import { createORPCClient } from '@orpc/client';
+import { HTTPLink } from '@orpc/client/fetch'; // New import
 import { RPCLink } from '@orpc/client/message-port';
 import { createSWRUtils } from '@orpc/experimental-react-swr';
 import type { RouterClient } from '@orpc/server';
@@ -23,21 +24,30 @@ import type { AppRouter } from '@/main/ipc/router';
 import { IPC_CHANNELS } from '@/shared/constants';
 
 class IPCManager {
-  private readonly clientPort: MessagePort;
-  private readonly serverPort: MessagePort;
+  private readonly clientPort?: MessagePort; // Make optional
+  private readonly serverPort?: MessagePort; // Make optional
 
-  private readonly rpcLink: RPCLink<Record<never, never>>;
+  private readonly rpcLink: RPCLink<Record<never, never>> | HTTPLink<Record<never, never>>; // Union type
   public readonly client: RouterClient<AppRouter>;
   private initialized: boolean = false;
 
   constructor() {
-    const { port1: clientChannelPort, port2: serverChannelPort } = new MessageChannel();
-    this.clientPort = clientChannelPort;
-    this.serverPort = serverChannelPort;
+    if (process.env.NODE_ENV === 'test') {
+      // In test environment, use HTTPLink
+      this.rpcLink = new HTTPLink({
+        url: 'http://localhost/rpc', // Default URL for MSW
+      });
+      // clientPort and serverPort are not needed for HTTPLink, so they remain undefined
+    } else {
+      // In production/development, use RPCLink over MessagePort
+      const { port1: clientChannelPort, port2: serverChannelPort } = new MessageChannel();
+      this.clientPort = clientChannelPort;
+      this.serverPort = serverChannelPort;
 
-    this.rpcLink = new RPCLink<Record<never, never>>({
-      port: this.clientPort,
-    });
+      this.rpcLink = new RPCLink<Record<never, never>>({
+        port: this.clientPort,
+      });
+    }
 
     this.client = createORPCClient<RouterClient<AppRouter>>(this.rpcLink);
   }
@@ -47,9 +57,11 @@ class IPCManager {
       return;
     }
 
-    this.clientPort.start();
-
-    window.postMessage(IPC_CHANNELS.START_ORPC_SERVER, '*', [this.serverPort]);
+    if (this.clientPort && this.serverPort) {
+      // Only initialize MessagePort if it exists
+      this.clientPort.start();
+      window.postMessage(IPC_CHANNELS.START_ORPC_SERVER, '*', [this.serverPort]);
+    }
     this.initialized = true;
   }
 }

@@ -71,8 +71,18 @@ A robust Inter-Process Communication system SHALL ensure end-to-end type safety 
 ### Requirement: Confirm Feature Migration to oRPC
 Existing `theme` and `window` features SHALL use oRPC handlers, with legacy IPC removed.
 
-#### Scenario: Theme toggle via oRPC
+#### Scenario: Confirm Feature Migration to oRPC
 - **Given** the application is running.
 - **When** user clicks theme toggle.
 - **Then** theme changes via `ipc.client.theme.toggleTheme()`, legacy handlers absent.
+
+### Requirement: OpenAPI Specification Generation
+
+The oRPC router MUST be capable of generating a machine-readable OpenAPI specification.
+
+#### Scenario: Generating OpenAPI Spec
+  - **Given** the `AppRouter` is defined with explicit input and output schemas.
+  - **When** a dedicated script (e.g., `scripts/generate-openapi.ts`) is executed.
+  - **Then** a valid `openapi.json` file MUST be produced, describing all oRPC procedures.
+  - **Reference:** `msw-integration/spec.md` for details on how this spec is used for mocking.
 

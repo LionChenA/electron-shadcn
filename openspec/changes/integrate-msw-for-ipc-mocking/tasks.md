@@ -39,28 +39,30 @@ This is an ordered list of tasks to implement the new unified mocking infrastruc
 
 ### Phase 3: Toolchain Integration (Vitest & Storybook)
 
-*   [ ] **6. Configure Vitest with MSW**:
+*   [x] **6. Configure Vitest with MSW**:
     *   Create `test/mocks/server.ts` to configure `setupServer` from `msw/node`.
     *   Update `test/vitest.setup.ts` to import the server and manage its lifecycle (`listen`, `resetHandlers`, `close`).
     *   *Validation*: Run a basic Vitest test that uses a generated handler and confirm it intercepts requests.
 
-*   [ ] **7. Configure Storybook with MSW**:
+*   [x] **7. Configure Storybook with MSW**:
     *   Update `.storybook/preview.ts` to configure the `mswLoader`.
     *   *Validation*: Create a simple story with a `parameters.msw.handlers` entry and verify it works in the Storybook UI.
 
 ### Phase 4: Implementation & Documentation
 
-*   [ ] **8. Implement Conditional oRPC Link**:
+*   [x] **8. Implement Conditional oRPC Link**:
     *   Refactor `src/renderer/ipc/manager.ts` to check for `process.env.NODE_ENV === 'test'`.
     *   When true, instantiate the oRPC client with an `HTTPLink` pointed at `http://localhost`.
     *   When false, use the existing `RPCLink` for Electron IPC.
 
-*   [ ] **9. Refactor `Updater.stories.tsx`**:
-    *   Remove all `vi.mock` and manual mock implementations from the file.
+*   [x] **9. Create and Implement `Updater.stories.tsx`**:
+    *   Create `src/renderer/components/Updater.stories.tsx`.
+    *   Implement a basic story for the `Updater` component.
+    *   Remove all `vi.mock` and manual mock implementations from the file (if any are implicitly present from previous plans).
     *   Rewrite all stories to use the auto-generated Kubb handlers, imported and passed to `parameters.msw.handlers`.
     *   *Validation*: All `Updater` stories render correctly and interaction tests work.
 
-*   [ ] **10. Update Dependent OpenSpec Documents**:
+*   [x] **10. Update Dependent OpenSpec Documents**:
     *   Modify the `testing-strategy` spec to reference the new `msw-integration` spec.
     *   Modify the `orpc-based-ipc` spec to mention the OpenAPI generation capability.
     *   *Validation*: The specs are consistent and cross-referenced.
