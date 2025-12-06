@@ -7,7 +7,6 @@
  *
  * Ensures handlers are window-aware without globals.
  */
-import { os } from '@orpc/server';
 import type { BrowserWindow } from 'electron';
 
 class IPCContext {
@@ -15,13 +14,6 @@ class IPCContext {
 
   public setMainWindow(window: BrowserWindow) {
     this.mainWindow = window;
-  }
-
-  private requireMainWindow(): BrowserWindow {
-    if (!this.mainWindow) {
-      throw new Error('Main window is not set in IPC context.');
-    }
-    return this.mainWindow;
   }
 }
 
