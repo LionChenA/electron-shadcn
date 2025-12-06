@@ -47,11 +47,31 @@ This will be achieved through the following pipeline:
     ```
     (Note: The `getAppCheckForUpdatesHandler` signature and usage might differ slightly based on Kubb's exact output, but the concept of a type-safe handler is the same.)
 
+    > [!IMPORTANT]
+    > A critical prerequisite for this pipeline is that all oRPC handlers in `src/main/ipc/` must have explicit Zod schemas defined for both their `input` and `output` using the `.input()` and `.output()` methods. Without these explicit schemas, the oRPC server cannot generate a sufficiently detailed OpenAPI specification, and Kubb will fail to produce meaningful, typed mocks.
+
     (Regarding custom plugins like `@kubb/plugin-mcp` you mentioned earlier: while a plugin with this exact name does not exist, Kubb's architecture is highly extensible, allowing for the development of custom plugins to generate code for specific protocols or tools, demonstrating its flexibility.)
 
-## 3. Toolchain Integration
+## 3. TypeScript Configuration Strategy
 
-The single set of auto-generated handlers will be consumed by all our testing tools, providing a single source of truth for mocking. The detailed integration for each tool will be documented in the new `msw-integration` OpenSpec.
+A key challenge is ensuring that our TypeScript compiler (`tsc -b`) can holistically validate all source code, including `src`, `test`, `scripts`, and Kubb-generated mock files, without conflicts arising from Kubb's generated import paths (which include `.ts` extensions). We leverage TypeScript's project references and separate `tsconfig` files to achieve this:
+
+1.  **Existing `tsconfig.vitest.json`**: This file, located at the project root, already includes `test/**/*.ts` and is configured for Vitest's environment (e.g., JSDOM types). To allow it to correctly process Kubb-generated files, we will modify it to include:
+    *   `"noEmit": true`: This tells the TypeScript compiler to only perform type checking and not generate any JavaScript output for files covered by this `tsconfig`.
+    *   `"allowImportingTsExtensions": true`: Since `noEmit` is set, this option can be safely enabled, allowing `tsc` to correctly resolve import paths that include `.ts` extensions (e.g., `import './foo.ts'`).
+
+2.  **Existing `tsconfig.playwright.json`**: This file, also at the project root, is specifically for Playwright E2E tests and includes `test/e2e/**/*.ts`. It does not require any specific modifications for Kubb-generated code, as E2E tests will not typically import generated mocks directly.
+
+3.  **Root `tsconfig.json`**: The root `tsconfig.json` will be updated to act as a central orchestrator. It will include references to:
+    *   `src/main`, `src/preload`, `src/renderer` (for application modules).
+    *   `./tsconfig.vitest.json` (for all Vitest-related test files, including generated mocks).
+    *   `./tsconfig.playwright.json` (for Playwright E2E test files).
+
+This holistic strategy ensures that `pnpm tsc -b` can run across the entire project, with each part being type-checked according to its specific needs, without conflicts between production builds and test-specific type checking.
+
+## 4. Toolchain Integration
+
+The single set of auto-generated handlers will be consumed by our primary testing tools, providing a single source of truth for mocking.
 
 *   **Vitest**:
     *   A central `test/mocks/server.ts` file will use `setupServer` from `msw/node` to create a Node.js-compatible mock server.
@@ -60,18 +80,19 @@ The single set of auto-generated handlers will be consumed by all our testing to
 *   **Storybook**:
     *   The `msw-storybook-addon` will be installed.
     *   The `.storybook/preview.ts` file will be configured with the `mswLoader`.
-    *   Individual stories will use the `parameters.msw.handlers` property to declaratively specify which auto-generated Kubb handlers are needed for that specific story, providing a clean, readable, and powerful way to test components in different states.
+    *   Individual stories will use the `parameters.msw.handlers` property to declaratively specify which auto-generated Kubb handlers are needed for that specific story.
 
-*   **Playwright**:
-    *   The `playwright-msw` library (or a similar solution) will be investigated and implemented.
-    *   The goal is to import the same Kubb-generated handlers directly into Playwright E2E tests, allowing us to fully control the application's backend responses even during full, end-to-end test runs. This is invaluable for creating stable tests for features like the update flow.
+## 5. A Note on End-to-End Testing
 
-This unified design ensures that a change in our API contract (a new oRPC procedure) will, after running the generation scripts, immediately result in updated, type-safe mock handlers being available across our entire testing ecosystem.
+After initial analysis, we have made a strategic decision **not** to integrate MSW with our Playwright End-to-End (E2E) tests.
 
-## 4. New OpenSpec: `msw-integration`
+E2E tests provide the most value when they verify the complete, integrated application with as few mocks as possible. Their purpose is to simulate a real user's experience. Mocking the API layer at this stage would diminish the confidence these tests provide. Instead, component-level and integration tests (via Vitest and Storybook) will be the primary places where we use MSW to test our UI against a wide variety of mocked API states.
+
+## 6. New OpenSpec: `msw-integration`
 
 A new, dedicated OpenSpec document, `msw-integration/spec.md`, will be created to formally define the architecture, setup, and usage guidelines for MSW within the project. This spec will cover:
 *   The overall philosophy of contract-based mocking with MSW.
-*   Detailed setup instructions for Vitest, Storybook, and Playwright.
+*   Detailed setup instructions for Vitest and Storybook.
 *   Guidelines for using Kubb-generated handlers.
 *   Best practices for writing MSW handlers and scenarios.
+*   The TypeScript configuration strategy that enables the tooling to work.

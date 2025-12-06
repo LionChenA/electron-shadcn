@@ -2,68 +2,70 @@
 
 This is an ordered list of tasks to implement the new unified mocking infrastructure based on MSW and Kubb.
 
-### Phase 1: Core Setup (OpenAPI & Kubb)
+### Phase 1: Configuration & Schemas
 
-*   [ ] **1. Install Dependencies**:
-    *   Install `msw` as a core development dependency.
-    *   Install Kubb and its required plugins: `@kubb/core`, `@kubb/cli`, `@kubb/swagger`, `@kubb/swagger-ts`, `@kubb/swagger-msw`, `@kubb/swagger-zod`, and `@kubb/swagger-faker`.
+*   [ ] **1. Configure TypeScript for Holistic Checking**:
+    *   Update the root `tsconfig.json` to add project references to `./tsconfig.vitest.json` and `./tsconfig.playwright.json`.
+    *   Update `tsconfig.vitest.json` to add the `"noEmit": true` and `"allowImportingTsExtensions": true` compiler options.
+    *   *Validation*: Run `pnpm tsc -b` and confirm it attempts to type-check the `test` directory.
 
-*   [ ] **2. Create OpenAPI Generation Script**:
-    *   Create a script (`scripts/generate-openapi.mjs`) that imports the oRPC `AppRouter` and uses `@orpc/server` utilities to export an `openapi.json` schema file.
-    *   Add a corresponding npm script to `package.json`: `"openapi:generate": "node scripts/generate-openapi.mjs"`.
-    *   *Validation*: Run the script and confirm `openapi.json` is created successfully.
+*   [ ] **2. Install Core Dependencies**:
+    *   Install `msw` and `msw-storybook-addon`.
+    *   Install Kubb and its plugins: `@kubb/core`, `@kubb/cli`, `@kubb/plugin-oas`, `@kubb/plugin-ts`, `@kubb/plugin-zod`, `@kubb/plugin-msw`, and `@kubb/plugin-faker`.
+    *   Install the peer dependency for the faker plugin: `@faker-js/faker`.
+    *   *Validation*: All dependencies are present in `package.json`.
 
-*   [ ] **3. Configure Kubb**:
+*   [ ] **3. Enforce Explicit Zod Schemas**:
+    *   Audit all oRPC handlers in `src/main/ipc/**/handlers.ts`.
+    *   Add explicit `.input()` and/or `.output()` Zod schemas to every handler to ensure a complete OpenAPI specification.
+    *   For streaming handlers, ensure the output schema is wrapped with the `eventIterator()` helper.
+    *   *Validation*: The OpenAPI generation step produces a detailed schema.
+
+### Phase 2: Code Generation
+
+*   [ ] **4. Create OpenAPI Generation Script**:
+    *   Create a script (`scripts/generate-openapi.ts`) that imports the oRPC `AppRouter` and uses `@orpc/openapi` to export a `test/mocks/openapi.json` schema file.
+    *   Add a corresponding npm script to `package.json`: `"openapi:generate": "tsx scripts/generate-openapi.ts"`.
+    *   *Validation*: Run the script and confirm `test/mocks/openapi.json` is created successfully.
+
+*   [ ] **5. Configure Kubb**:
     *   Create a `kubb.config.ts` file in the project root.
-    *   Configure the input to point to the generated `openapi.json`.
-    *   Configure the output to generate MSW handlers to `test/mocks/gen/handlers.ts`.
+    *   Configure the input to point to the generated `test/mocks/openapi.json`.
+    *   Configure the output to generate files to `test/mocks/gen/`.
+    *   Configure `plugin-ts`, `plugin-zod`, `plugin-faker`, and `plugin-msw` to output to their respective subdirectories (`types`, `zod`, `faker`, `msw`).
+    *   **Crucially, add `extension: { '.ts': '' }` to the top-level Kubb output configuration.**
     *   Add a corresponding npm script: `"mocks:generate": "kubb generate"`.
-    *   *Validation*: Run the script and confirm typed MSW handlers are generated.
+    *   *Validation*: Run `openapi:generate` then `mocks:generate` and confirm typed files are generated in `test/mocks/gen`, with import paths *not* containing `.ts` extensions.
 
-### Phase 2: Toolchain Integration
+### Phase 3: Toolchain Integration (Vitest & Storybook)
 
-*   [ ] **4. Configure Vitest with MSW**:
+*   [ ] **6. Configure Vitest with MSW**:
     *   Create `test/mocks/server.ts` to configure `setupServer` from `msw/node`.
     *   Update `test/vitest.setup.ts` to import the server and manage its lifecycle (`listen`, `resetHandlers`, `close`).
     *   *Validation*: Run a basic Vitest test that uses a generated handler and confirm it intercepts requests.
 
-*   [ ] **5. Configure Storybook with MSW**:
-    *   Install `msw-storybook-addon`.
-    *   Update `.storybook/preview.ts` to call `initialize()` and add the `mswLoader`.
+*   [ ] **7. Configure Storybook with MSW**:
+    *   Update `.storybook/preview.ts` to configure the `mswLoader`.
     *   *Validation*: Create a simple story with a `parameters.msw.handlers` entry and verify it works in the Storybook UI.
 
-*   [ ] **6. Research Playwright Integration**:
-    *   Investigate using `playwright-msw` or Playwright's native network interception (`page.route`).
-    *   Choose and document the best approach for reusing the Kubb-generated handlers in E2E tests.
+### Phase 4: Implementation & Documentation
 
-### Phase 3: Implementation & Refactoring
-
-*   [ ] **7. Implement Conditional oRPC Link**:
+*   [ ] **8. Implement Conditional oRPC Link**:
     *   Refactor `src/renderer/ipc/manager.ts` to check for `process.env.NODE_ENV === 'test'`.
     *   When true, instantiate the oRPC client with an `HTTPLink` pointed at `http://localhost`.
     *   When false, use the existing `RPCLink` for Electron IPC.
 
-*   [ ] **8. Refactor `Updater.stories.tsx`**:
+*   [ ] **9. Refactor `Updater.stories.tsx`**:
     *   Remove all `vi.mock` and manual mock implementations from the file.
     *   Rewrite all stories to use the auto-generated Kubb handlers, imported and passed to `parameters.msw.handlers`.
-    *   Ensure the `play` function for the interaction test works correctly with the new MSW setup.
+    *   *Validation*: All `Updater` stories render correctly and interaction tests work.
 
-*   [ ] **9. Validate Full Integration**:
-    *   Run `pnpm test` and confirm all Vitest tests pass.
-    *   Run `pnpm storybook` and confirm all `Updater` stories render correctly and interaction tests work.
-    *   *Validation*: All checks pass, and the new system is fully operational.
+*   [ ] **10. Update Dependent OpenSpec Documents**:
+    *   Modify the `testing-strategy` spec to reference the new `msw-integration` spec.
+    *   Modify the `orpc-based-ipc` spec to mention the OpenAPI generation capability.
+    *   *Validation*: The specs are consistent and cross-referenced.
 
-### Phase 4: Playwright Integration & Documentation
+### Cancelled Tasks
 
-*   [ ] **9. Implement Playwright Integration**:
-    *   Install `playwright-msw`.
-    *   Integrate the Kubb-generated handlers into Playwright E2E tests, ensuring they can be used to mock backend responses.
-    *   *Validation*: Run E2E tests with MSW mocks and confirm they behave as expected.
-
-*   [ ] **10. Create `msw-integration` Spec**:
-    *   Create a new OpenSpec document at `openspec/changes/integrate-msw-for-ipc-mocking/specs/msw-integration/spec.md`.
-    *   Formally define the architecture, setup, and usage guidelines for MSW within the project, covering Vitest, Storybook, and Playwright integration, and the use of Kubb-generated handlers.
-
-*   [ ] **11. Update Existing OpenSpec Documents**:
-    *   Modify the `testing-strategy` spec to reference the new `msw-integration` spec and state that IPC/API mocking should now be done via MSW.
-    *   Modify the `storybook-configuration` spec to reference the new `msw-integration` spec and outline Storybook's integration with MSW.
+*   **[CANCELLED] Research Playwright Integration**: This was deemed out of scope. E2E tests will run against the real, un-mocked application to provide maximum confidence.
+*   **[CANCELLED] Implement Playwright Integration**: Cancelled for the reason above.

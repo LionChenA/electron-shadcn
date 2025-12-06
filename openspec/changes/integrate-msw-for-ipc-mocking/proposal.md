@@ -9,16 +9,17 @@ Reliably testing components that depend on backend responses is a critical chall
 This strategy will:
 *   **Drastically Increase Test Fidelity**: Components will be tested against a realistic, low-level mock of the communication layer, using their real, unmodified data-fetching logic.
 *   **Automate Mock Generation**: By using **Kubb** to generate MSW handlers directly from our oRPC-generated OpenAPI schema, we eliminate manual mock creation, ensuring mocks are always in sync with the API contract and fully type-safe.
-*   **Unify the Testing Experience**: A single, auto-generated set of MSW handlers will become the "source of truth" for mocking, used consistently across Vitest (unit/integration), Storybook (component/visual), and Playwright (E2E) tests.
+*   **Unify the Testing Experience**: A single, auto-generated set of MSW handlers will become the "source of truth" for mocking, used consistently across Vitest (unit/integration) and Storybook (component/visual) tests.
 *   **Improve Developer Experience & Velocity**: Writing tests becomes faster and more declarative. Developers can focus on test logic by simply selecting the appropriate auto-generated MSW handler, rather than worrying about mock implementation details.
 
 ## Proposed Changes
 
-1.  **Enable oRPC's OpenAPI/HTTP Endpoint**: Configure the oRPC client to use a standard HTTP transport layer during tests, making it automatically compatible with MSW.
-2.  **Introduce Kubb for Code Generation**: Add a process to generate an `openapi.json` schema from our oRPC router and use Kubb to automatically generate type-safe MSW handlers from this schema.
-3.  **Integrate MSW Across All Tools**:
+1.  **Enforce Explicit Zod Schemas**: Mandate that all oRPC handlers MUST have explicit `.input()` and `.output()` Zod schemas to ensure a high-fidelity OpenAPI specification.
+2.  **Establish Holistic TypeScript Checking**: Reconfigure the project's TypeScript setup to enable `tsc -b` to perform a complete, project-wide type check that covers `src`, `test`, and `scripts` directories, using partitioned configurations to handle the special requirements of generated code.
+3.  **Enable oRPC's OpenAPI/HTTP Endpoint**: Configure the oRPC client to use a standard HTTP transport layer during tests, making it automatically compatible with MSW.
+4.  **Introduce Kubb for Code Generation**: Add a process to generate an `openapi.json` schema from our oRPC router and use Kubb to automatically generate type-safe MSW handlers from this schema.
+5.  **Integrate MSW Across Testing Tools**:
     *   **Vitest**: Configure `msw/node` to provide API mocks for tests running in Node.js and JSDOM.
     *   **Storybook**: Use `msw-storybook-addon` to allow stories to declaratively specify their required backend responses.
-    *   **Playwright**: Integrate `playwright-msw` to reuse mock handlers in end-to-end tests.
-4.  **Reference Implementation**: Refactor the tests for `Updater.tsx` to serve as the "gold standard" example of this new testing paradigm.
-5.  **Update Specs**: Formalize this new strategy in the project's OpenSpec documents.
+6.  **Reference Implementation**: Refactor the tests for `Updater.tsx` to serve as the "gold standard" example of this new testing paradigm.
+7.  **Update Specs**: Formalize this new strategy in the project's OpenSpec documents and update dependent specs (`testing-strategy`, `orpc-based-ipc`).
