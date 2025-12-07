@@ -19,7 +19,7 @@ export async function getCurrentTheme(): Promise<ThemePreferences> {
 }
 
 export async function setTheme(newTheme: ThemeMode) {
-  await ipc.client.theme.setThemeMode(newTheme);
+  await ipc.client.theme.setThemeMode({ mode: newTheme });
   localStorage.setItem(THEME_KEY, newTheme);
 }
 

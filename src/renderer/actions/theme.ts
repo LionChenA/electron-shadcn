@@ -19,7 +19,7 @@ export async function getCurrentTheme(): Promise<ThemePreferences> {
 
 export async function setTheme(newTheme: ThemeMode) {
   const isDarkMode = newTheme === 'dark';
-  await ipc.client.theme.setThemeMode(newTheme);
+  await ipc.client.theme.setThemeMode({ mode: newTheme });
   localStorage.setItem(LOCAL_STORAGE_KEYS.THEME, newTheme);
   updateDocumentTheme(isDarkMode);
 }

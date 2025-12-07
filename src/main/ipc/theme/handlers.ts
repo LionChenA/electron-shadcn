@@ -22,7 +22,8 @@ export const toggleThemeMode = os.output(z.boolean()).handler(() => {
 export const setThemeMode = os
   .input(setThemeModeInputSchema)
   .output(ThemeSourceSchema)
-  .handler(({ input: mode }) => {
+  .handler(({ input }) => {
+    const { mode } = input;
     switch (mode) {
       case 'light':
         nativeTheme.themeSource = 'light';
