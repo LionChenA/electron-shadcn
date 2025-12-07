@@ -16,7 +16,7 @@
  */
 
 import { createORPCClient } from '@orpc/client';
-import { HTTPLink } from '@orpc/client/fetch'; // New import
+import { RPCLink as HTTPRPCLink } from '@orpc/client/fetch'; // Corrected import for HTTP-based RPCLink
 import { RPCLink } from '@orpc/client/message-port';
 import { createSWRUtils } from '@orpc/experimental-react-swr';
 import type { RouterClient } from '@orpc/server';
@@ -27,17 +27,17 @@ class IPCManager {
   private readonly clientPort?: MessagePort; // Make optional
   private readonly serverPort?: MessagePort; // Make optional
 
-  private readonly rpcLink: RPCLink<Record<never, never>> | HTTPLink<Record<never, never>>; // Union type
+  private readonly rpcLink: RPCLink<Record<never, never>> | HTTPRPCLink<Record<never, never>>; // Union type
   public readonly client: RouterClient<AppRouter>;
   private initialized: boolean = false;
 
   constructor() {
     if (process.env.NODE_ENV === 'test') {
-      // In test environment, use HTTPLink
-      this.rpcLink = new HTTPLink({
+      // In test environment, use HTTPRPCLink
+      this.rpcLink = new HTTPRPCLink({
         url: 'http://localhost/rpc', // Default URL for MSW
       });
-      // clientPort and serverPort are not needed for HTTPLink, so they remain undefined
+      // clientPort and serverPort are not needed for HTTPRPCLink, so they remain undefined
     } else {
       // In production/development, use RPCLink over MessagePort
       const { port1: clientChannelPort, port2: serverChannelPort } = new MessageChannel();

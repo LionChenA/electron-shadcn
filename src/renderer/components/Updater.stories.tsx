@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { HttpResponse } from 'msw'; // Import HttpResponse
 import {
   appAppVersionHandler,
   appCheckForUpdatesHandler,
@@ -17,13 +18,13 @@ const meta = {
     // Default handlers for all stories in this file
     msw: {
       handlers: [
-        appCurrentPlatfomHandler(() => ({ body: 'darwin' })),
-        appAppVersionHandler(() => ({ body: '1.0.0' })),
-        appCheckForUpdatesHandler(() => ({ body: undefined })), // No specific body needed for void
-        appRestartAndInstallHandler(() => ({ body: undefined })), // No specific body needed for void
+        appCurrentPlatfomHandler(() => HttpResponse.json('darwin')),
+        appAppVersionHandler(() => HttpResponse.json('1.0.0')),
+        appCheckForUpdatesHandler(() => HttpResponse.json(undefined)), // Use HttpResponse.json(undefined) for void
+        appRestartAndInstallHandler(() => HttpResponse.json(undefined)), // Use HttpResponse.json(undefined) for void
         // Default onUpdateStatus handler, can be overridden by individual stories
         appOnUpdateStatusHandler(() => {
-          return { event: 'message', data: { status: 'not-available' } };
+          return HttpResponse.json({ event: 'message', data: { status: 'not-available' } });
         }),
       ],
     },
@@ -42,10 +43,10 @@ export const CheckingForUpdates: Story = {
     msw: {
       handlers: [
         appOnUpdateStatusHandler(() => {
-          return {
+          return HttpResponse.json({
             event: 'message',
             data: { status: 'checking', message: 'Checking for updates...' },
-          };
+          });
         }),
       ],
     },
@@ -57,10 +58,10 @@ export const UpdateAvailable: Story = {
     msw: {
       handlers: [
         appOnUpdateStatusHandler(() => {
-          return {
+          return HttpResponse.json({
             event: 'message',
             data: { status: 'available', message: 'Update available. Downloading...' },
-          };
+          });
         }),
       ],
     },
@@ -72,10 +73,10 @@ export const UpdateDownloaded: Story = {
     msw: {
       handlers: [
         appOnUpdateStatusHandler(() => {
-          return {
+          return HttpResponse.json({
             event: 'message',
             data: { status: 'downloaded', message: 'Update downloaded. Restart to install.' },
-          };
+          });
         }),
       ],
     },
@@ -87,10 +88,10 @@ export const UpdateError: Story = {
     msw: {
       handlers: [
         appOnUpdateStatusHandler(() => {
-          return {
+          return HttpResponse.json({
             event: 'message',
             data: { status: 'error', message: 'Failed to check for updates.' },
-          };
+          });
         }),
       ],
     },
