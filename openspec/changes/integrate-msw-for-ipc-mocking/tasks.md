@@ -1,73 +1,72 @@
 # Tasks: Integrate OpenAPI-Based MSW Infrastructure
 
-This is an ordered list of tasks to implement the new unified mocking infrastructure based on MSW and Kubb.
+This is the final, ordered list of tasks to implement the new unified mocking infrastructure. It reflects the successful implementation path discovered through our iterative process.
 
-### Phase 1: Configuration & Schemas
+### Phase 1: Prerequisite Configuration
 
 *   [x] **1. Configure TypeScript for Holistic Checking**:
     *   Update the root `tsconfig.json` to add project references to `./tsconfig.vitest.json` and `./tsconfig.playwright.json`.
-    *   Update `tsconfig.vitest.json` to add the `"noEmit": true` and `"allowImportingTsExtensions": true` compiler options.
-    *   *Validation*: Run `pnpm tsc -b` and confirm it attempts to type-check the `test` directory.
+    *   Update `tsconfig.vitest.json` to add the compiler options `"noEmit": true` and `"allowImportingTsExtensions": true`.
+    *   Update `src/renderer/tsconfig.json` to add `"**/*.stories.tsx"` and `"**/*.test.tsx"` to its `exclude` array.
+    *   *Validation*: `pnpm tsc -b` runs and is ready to report errors from the entire project.
 
-*   [x] **2. Install Core Dependencies**:
-    *   Install `msw` and `msw-storybook-addon`.
-    *   Install Kubb and its plugins: `@kubb/core`, `@kubb/cli`, `@kubb/plugin-oas`, `@kubb/plugin-ts`, `@kubb/plugin-zod`, `@kubb/plugin-msw`, and `@kubb/plugin-faker`.
-    *   Install the peer dependency for the faker plugin: `@faker-js/faker`.
+*   [x] **2. Enforce Explicit & Named Zod Schemas**:
+    *   Audit all oRPC handlers in `src/main/ipc/**/handlers.ts`.
+    *   Add explicit `.output()` Zod schemas to every handler.
+    *   For handlers requiring an input body, ensure the schema is a named `z.object({})` to avoid "anonymous inline schema" issues.
+    *   Update client-side calls to match the new named object schemas.
+    *   For streaming handlers, ensure the output schema is wrapped with `eventIterator()`.
+    *   *Validation*: The codebase is internally consistent and type-safe before code generation.
+
+*   [x] **3. Implement Automatic oRPC Tagging**:
+    *   In `src/main/ipc/router.ts`, use the `os.tag('tagName').router(subRouter)` pattern to automatically tag all procedures based on their namespace.
+    *   Remove any manual `.route({ tags: [...] })` from individual handlers.
+    *   *Validation*: The oRPC router is configured for optimal OpenAPI generation.
+
+### Phase 2: Generation Pipeline
+
+*   [x] **4. Install All Dependencies**:
+    *   Install `msw`, `msw-storybook-addon`, all `@kubb/*` plugins, `@orpc/openapi`, `@orpc/zod`, and `@faker-js/faker`.
     *   *Validation*: All dependencies are present in `package.json`.
 
-*   [x] **3. Enforce Explicit Zod Schemas**:
-    *   Audit all oRPC handlers in `src/main/ipc/**/handlers.ts`.
-    *   Add explicit `.input()` and/or `.output()` Zod schemas to every handler to ensure a complete OpenAPI specification.
-    *   For streaming handlers, ensure the output schema is wrapped with the `eventIterator()` helper.
-    *   *Validation*: The OpenAPI generation step produces a detailed schema.
+*   [x] **5. Create OpenAPI Generation Script**:
+    *   Create `scripts/generate-openapi.ts` using `OpenAPIGenerator` and `ZodToJsonSchemaConverter`.
+    *   Wrap the generation logic in an `async` IIFE to handle top-level await.
+    *   Add the `"openapi:generate": "tsx scripts/generate-openapi.ts"` script to `package.json`.
+    *   *Validation*: Running `pnpm openapi:generate` successfully creates `test/mocks/openapi.json` with `tags` on each operation.
 
-### Phase 2: Code Generation
+*   [x] **6. Configure Kubb**:
+    *   Create `kubb.config.ts` using the simplest recommended configuration.
+    *   **Crucially, set `output.extension: { '.ts': '' }`** to generate specifier-bare import paths.
+    *   Do not use complex `group` or `barrelType` overrides. Trust the default "ugly but robust" file generation.
+    *   Add a `"mocks:generate": "kubb generate"` script to `package.json`.
+    *   Add a `hooks.done` script to run Biome on the generated files.
+    *   *Validation*: Running `pnpm mocks:generate` successfully creates the full tree of mock files in `test/mocks/gen`.
 
-*   [x] **4. Create OpenAPI Generation Script**:
-    *   Create a script (`scripts/generate-openapi.ts`) that imports the oRPC `AppRouter` and uses `@orpc/openapi` to export a `test/mocks/openapi.json` schema file.
-    *   Add a corresponding npm script to `package.json`: `"openapi:generate": "tsx scripts/generate-openapi.ts"`.
-    *   *Validation*: Run the script and confirm `test/mocks/openapi.json` is created successfully.
+### Phase 3: Integration & Implementation
 
-*   [x] **5. Configure Kubb**:
-    *   Create a `kubb.config.ts` file in the project root.
-    *   Configure the input to point to the generated `test/mocks/openapi.json`.
-    *   Configure the output to generate files to `test/mocks/gen/`.
-    *   Configure `plugin-ts`, `plugin-zod`, `plugin-faker`, and `plugin-msw` to output to their respective subdirectories (`types`, `zod`, `faker`, `msw`).
-    *   **Crucially, add `extension: { '.ts': '' }` to the top-level Kubb output configuration.**
-    *   Add a corresponding npm script: `"mocks:generate": "kubb generate"`.
-    *   *Validation*: Run `openapi:generate` then `mocks:generate` and confirm typed files are generated in `test/mocks/gen`, with import paths *not* containing `.ts` extensions.
-
-### Phase 3: Toolchain Integration (Vitest & Storybook)
-
-*   [x] **6. Configure Vitest with MSW**:
+*   [x] **7. Configure Vitest with MSW**:
     *   Create `test/mocks/server.ts` to configure `setupServer` from `msw/node`.
-    *   Update `test/vitest.setup.ts` to import the server and manage its lifecycle (`listen`, `resetHandlers`, `close`).
-    *   *Validation*: Run a basic Vitest test that uses a generated handler and confirm it intercepts requests.
+    *   Update `test/vitest.setup.ts` to manage the server lifecycle.
 
-*   [x] **7. Configure Storybook with MSW**:
+*   [x] **8. Configure Storybook with MSW**:
     *   Update `.storybook/preview.ts` to configure the `mswLoader`.
-    *   *Validation*: Create a simple story with a `parameters.msw.handlers` entry and verify it works in the Storybook UI.
 
-### Phase 4: Implementation & Documentation
+*   [x] **9. Implement Conditional oRPC Link**:
+    *   Refactor `src/renderer/ipc/manager.ts` to use `RPCLink as HTTPRPCLink` from `@orpc/client/fetch` in the test environment.
 
-*   [x] **8. Implement Conditional oRPC Link**:
-    *   Refactor `src/renderer/ipc/manager.ts` to check for `process.env.NODE_ENV === 'test'`.
-    *   When true, instantiate the oRPC client with an `HTTPLink` pointed at `http://localhost`.
-    *   When false, use the existing `RPCLink` for Electron IPC.
-
-*   [x] **9. Create and Implement `Updater.stories.tsx`**:
+*   [x] **10. Implement Storybook Example**:
     *   Create `src/renderer/components/Updater.stories.tsx`.
-    *   Implement a basic story for the `Updater` component.
-    *   Remove all `vi.mock` and manual mock implementations from the file (if any are implicitly present from previous plans).
-    *   Rewrite all stories to use the auto-generated Kubb handlers, imported and passed to `parameters.msw.handlers`.
-    *   *Validation*: All `Updater` stories render correctly and interaction tests work.
+    *   Import handlers from the top-level barrel file (`../../../test/mocks/gen/msw`).
+    *   Use `HttpResponse.json()` to create valid mock responses.
+    *   *Validation*: `pnpm tsc -b` completes with no errors, and stories render correctly.
 
-*   [x] **10. Update Dependent OpenSpec Documents**:
-    *   Modify the `testing-strategy` spec to reference the new `msw-integration` spec.
-    *   Modify the `orpc-based-ipc` spec to mention the OpenAPI generation capability.
-    *   *Validation*: The specs are consistent and cross-referenced.
+### Phase 4: Documentation
+
+*   [x] **11. Update OpenSpec Documents**:
+    *   Update `design.md`, `proposal.md`, and `specs/msw-integration/spec.md` to reflect the final, successful architecture.
+    *   Update `testing-strategy` and `orpc-based-ipc` specs to reference the new MSW strategy.
 
 ### Cancelled Tasks
 
-*   **[CANCELLED] Research Playwright Integration**: This was deemed out of scope. E2E tests will run against the real, un-mocked application to provide maximum confidence.
-*   **[CANCELLED] Implement Playwright Integration**: Cancelled for the reason above.
+*   **[CANCELLED] Playwright Integration**: E2E tests will run against the real, un-mocked application to provide maximum confidence. MSW will not be used.

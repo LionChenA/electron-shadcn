@@ -69,3 +69,24 @@ Storybook MUST be configured to allow declarative definition of MSW handlers on 
   - **Given** an `Updater` component story is viewed in Storybook.
   - **When** the story defines a specific MSW handler for `app.checkForUpdates` via `parameters.msw.handlers`.
   - **Then** the component MUST render according to the mock response provided by that handler.
+
+### Requirement: Consuming Generated Mocks
+
+The generated mock directory (`test/mocks/gen`) MUST be treated as a black box, and all consumption of generated code MUST be done via the top-level barrel file.
+
+#### Scenario: Importing a MSW Handler in a Test
+  - **Given** a developer needs to use `appCheckForUpdatesHandler` in a test file.
+  - **When** they write the import statement.
+  - **Then** the import path MUST be from the top-level barrel file (e.g., `import { appCheckForUpdatesHandler } from '@/test/mocks/gen';`).
+  - **And** they MUST NOT use deep, relative paths into the `gen` directory.
+
+### Requirement: Adding New Mockable Procedures
+
+Developers adding new oRPC procedures MUST follow a set of conventions to ensure compatibility with the automated mocking pipeline.
+
+#### Scenario: Developer Adds a New Procedure
+  - **Given** a developer is adding a new procedure `user.create`.
+  - **When** they define the handler in `src/main/ipc/user/handlers.ts`.
+  - **Then** they MUST define explicit, named Zod object schemas for any input body to avoid "anonymous schema" issues.
+  - **And** they MUST ensure the new `user` sub-router is tagged in the root `router.ts` using `os.tag('user').router(user)`.
+  - **And** after running `pnpm openapi:generate` and `pnpm mocks:generate`, the new handlers MUST be available for import from `@/test/mocks/gen`.

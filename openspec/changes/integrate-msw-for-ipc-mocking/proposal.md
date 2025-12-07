@@ -1,6 +1,6 @@
 # Proposal: Integrate OpenAPI-Based MSW Infrastructure for Mocking
 
-This proposal outlines a plan to implement a comprehensive, project-wide API/IPC mocking strategy using MSW (Mock Service Worker). This new infrastructure will be based on oRPC's native OpenAPI support and will leverage code generation via Kubb to provide a unified, type-safe mocking system for all our testing environments: Vitest, Storybook, and Playwright.
+This proposal outlines a plan to implement a comprehensive, project-wide API/IPC mocking strategy using MSW (Mock Service Worker). This new infrastructure will be based on oRPC's native OpenAPI support and will leverage code generation via Kubb to provide a unified, type-safe mocking system for our primary testing environments: Vitest and Storybook.
 
 ## Why
 
