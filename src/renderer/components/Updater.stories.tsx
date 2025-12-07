@@ -6,7 +6,7 @@ import {
   appCurrentPlatfomHandler,
   appOnUpdateStatusHandler,
   appRestartAndInstallHandler,
-} from '../../../test/mocks/gen/msw/app';
+} from '../../../test/mocks/gen/msw';
 import { Updater } from './Updater';
 
 const meta = {
