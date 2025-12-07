@@ -13,9 +13,9 @@ import { theme } from './theme';
 import { window } from './window';
 
 export const router = os.router({
-  app,
-  theme,
-  window,
+  app: os.tag('app').router(app),
+  theme: os.tag('theme').router(theme),
+  window: os.tag('window').router(window),
 });
 
 export type AppRouter = typeof router;

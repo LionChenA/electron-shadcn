@@ -8,6 +8,9 @@
     "/app/currentPlatfom": {
       "post": {
         "operationId": "app.currentPlatfom",
+        "tags": [
+          "app"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -25,6 +28,9 @@
     "/app/appVersion": {
       "post": {
         "operationId": "app.appVersion",
+        "tags": [
+          "app"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -42,6 +48,9 @@
     "/app/checkForUpdates": {
       "post": {
         "operationId": "app.checkForUpdates",
+        "tags": [
+          "app"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -66,6 +75,9 @@
     "/app/restartAndInstall": {
       "post": {
         "operationId": "app.restartAndInstall",
+        "tags": [
+          "app"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -90,6 +102,9 @@
     "/app/onUpdateStatus": {
       "post": {
         "operationId": "app.onUpdateStatus",
+        "tags": [
+          "app"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -192,6 +207,9 @@
     "/theme/getCurrentThemeMode": {
       "post": {
         "operationId": "theme.getCurrentThemeMode",
+        "tags": [
+          "theme"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -219,15 +237,26 @@
     "/theme/setThemeMode": {
       "post": {
         "operationId": "theme.setThemeMode",
+        "tags": [
+          "theme"
+        ],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "enum": [
-                  "light",
-                  "dark",
-                  "system"
+                "type": "object",
+                "properties": {
+                  "mode": {
+                    "enum": [
+                      "light",
+                      "dark",
+                      "system"
+                    ]
+                  }
+                },
+                "required": [
+                  "mode"
                 ]
               }
             }
@@ -260,6 +289,9 @@
     "/theme/toggleThemeMode": {
       "post": {
         "operationId": "theme.toggleThemeMode",
+        "tags": [
+          "theme"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -277,6 +309,9 @@
     "/window/minimizeWindow": {
       "post": {
         "operationId": "window.minimizeWindow",
+        "tags": [
+          "window"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -301,6 +336,9 @@
     "/window/maximizeWindow": {
       "post": {
         "operationId": "window.maximizeWindow",
+        "tags": [
+          "window"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -325,6 +363,9 @@
     "/window/closeWindow": {
       "post": {
         "operationId": "window.closeWindow",
+        "tags": [
+          "window"
+        ],
         "responses": {
           "200": {
             "description": "OK",
