@@ -13,6 +13,7 @@ export default defineConfig({
   output: {
     path: './test/mocks/gen',
     clean: true,
+    barrelType: 'named',
     extension: {
       '.ts': '', // Crucial: Remove .ts extension from import paths
     },
@@ -23,7 +24,8 @@ export default defineConfig({
     }),
     pluginTs({
       output: {
-        path: 'types',
+        path: 'types.ts',
+        barrelType: false,
       },
       enumType: 'asConst',
     }),
@@ -31,16 +33,20 @@ export default defineConfig({
       output: {
         path: 'zod',
       },
+      group: { type: 'tag' },
+      typed: true,
     }),
     pluginFaker({
       output: {
         path: 'faker',
       },
+      group: { type: 'tag' },
     }),
     pluginMsw({
       output: {
         path: 'msw',
       },
+      group: { type: 'tag' },
     }),
   ],
 });

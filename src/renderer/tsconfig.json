@@ -4,5 +4,6 @@
     "outDir": "../../dist/renderer"
   },
   "include": ["./**/*", "../types.d.ts"],
+  "exclude": ["**/*.stories.tsx", "**/*.test.tsx"],
   "references": [{ "path": "../main" }, { "path": "../preload" }, { "path": "../shared" }]
 }

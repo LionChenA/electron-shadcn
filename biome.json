@@ -12,6 +12,7 @@
       "*.config.js",
       "*.config.ts",
       "*.config.mts",
+      "./test/mocks/gen/**/*",
       "forge.config.ts",
       "!node_modules",
       "!dist",
