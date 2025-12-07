@@ -18,7 +18,7 @@ const config: StorybookConfig = {
   },
   async viteFinal(config) {
     return mergeConfig(config, {
-      plugins: [tsconfigPaths(), tailwindcss()],
+      plugins: [tsconfigPaths({ projects: ['tsconfig.json'] }), tailwindcss()],
     });
   },
 };

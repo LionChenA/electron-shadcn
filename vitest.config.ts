@@ -63,7 +63,7 @@ export default defineConfig({
             storybookScript: 'pnpm storybook --no-open',
           }),
           react(),
-          tsconfigPaths(),
+          tsconfigPaths({ projects: ['tsconfig.json'] }),
         ],
         test: {
           name: 'storybook',
