@@ -1,7 +1,7 @@
 ---
 title: Refactor IPC for Subscriptions & Implement Updater Feedback
 id: refine-auto-updater-feedback
-status: draft
+status: complete
 ---
 
 ## Goal
