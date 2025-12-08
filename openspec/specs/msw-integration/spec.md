@@ -1,7 +1,7 @@
 # msw-integration Specification
 
 ## Purpose
-TBD - created by archiving change integrate-msw-for-ipc-mocking. Update Purpose after archive.
+Integrate Mock Service Worker (MSW) as the standard for mocking IPC and API calls across all test environments (Vitest, Storybook) to ensure consistent and predictable test behavior.
 ## Requirements
 ### Requirement: Unified Mocking Infrastructure
 

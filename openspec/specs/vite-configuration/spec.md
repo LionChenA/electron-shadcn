@@ -1,7 +1,7 @@
 # vite-configuration Specification
 
 ## Purpose
-TBD - created by archiving change refine-build-and-test-configuration. Update Purpose after archive.
+Define a modular Vite build system with a shared base configuration and process-specific configs (`main`, `renderer`, `preload`) to ensure optimized and correct builds for each Electron process.
 ## Requirements
 ### Requirement: Per-Process Vite Configurations
 

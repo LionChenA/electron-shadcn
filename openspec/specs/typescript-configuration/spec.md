@@ -1,7 +1,7 @@
 # typescript-configuration Specification
 
 ## Purpose
-TBD - created by archiving change refine-build-and-test-configuration. Update Purpose after archive.
+Establish a robust and modular TypeScript configuration using a shared `tsconfig.base.json` to ensure type consistency across main, renderer, preload, and test environments.
 ## Requirements
 ### Requirement: Centralized Base Configuration
 

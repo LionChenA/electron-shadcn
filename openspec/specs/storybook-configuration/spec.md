@@ -1,7 +1,7 @@
 # storybook-configuration Specification
 
 ## Purpose
-TBD - created by archiving change refine-build-and-test-configuration. Update Purpose after archive.
+Configure Storybook for component development and automated testing, integrating it with Vitest for interaction tests and ensuring a consistent Vite build environment.
 ## Requirements
 ### Requirement: Integrated Component Testing with Vitest
 
@@ -32,4 +32,19 @@ The Vitest `storybook` project configuration MUST rely on the `@storybook/addon-
   - **Given** the `storybook` project is defined in `vitest.config.ts`.
   - **When** configuring the `test` property for this project.
   - **Then** the `include` property MUST NOT be used, as the addon automatically discovers tests based on the `.storybook/main.ts` `stories` field.
+
+### Requirement: Consistent Storybook Vite Configuration
+Storybook's Vite configuration SHALL be derived from the main application's renderer configuration to ensure a consistent build environment.
+
+*   **Reason**: To resolve path alias issues and prevent configuration drift between the development server and Storybook.
+
+#### Scenario: Path aliases resolve correctly
+-   **GIVEN** the Storybook configuration is reusing the renderer's Vite config
+-   **WHEN** a story file imports a component using an alias (e.g., `import { Button } from '@/components/ui/Button'`)
+-   **THEN** the import resolves successfully and the component renders in Storybook.
+
+#### Scenario: Tailwind CSS is applied
+-   **GIVEN** the Storybook configuration is reusing the renderer's Vite config
+-   **WHEN** a component uses Tailwind utility classes
+-   **THEN** the styles are correctly applied in the Storybook UI.
 
